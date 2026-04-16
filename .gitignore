@@ -1,0 +1,80 @@
+# ================================
+# Java / Maven
+# ================================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+.mvn/wrapper/maven-wrapper.jar
+
+# ================================
+# Spring Boot
+# ================================
+spring-shell.log
+application-local.properties
+application-local.yml
+
+# ================================
+# Node / npm
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.pnp
+.pnp.js
+
+# ================================
+# Vite / build outputs
+# ================================
+frontend/dist/
+frontend/.vite/
+
+# ================================
+# Variables de entorno (secretos)
+# ================================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ================================
+# IDEs — IntelliJ IDEA
+# ================================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# ================================
+# IDEs — VS Code
+# ================================
+.vscode/
+!.vscode/extensions.json
+
+# ================================
+# OS
+# ================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ================================
+# Logs
+# ================================
+logs/
+*.log
+
+# ================================
+# Docker
+# ================================
+.docker/

@@ -1,4 +1,3 @@
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
@@ -25,9 +24,10 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://localhost:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
@@ -44,25 +44,22 @@ services:
       kafka:
         condition: service_healthy
     entrypoint: [ "/bin/sh", "-c" ]
-    command: |
-      "
-      # Esperar un momento extra para asegurar que el broker acepta peticiones
-      sleep 5;
-      echo 'Creando tópicos...'
-      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic domain.events --partitions 3 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic domain.events.enriched --partitions 3 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic domain.event.dlt --partitions 1 --replication-factor 1
-      echo 'Tópicos creados correctamente:'
-      kafka-topics --bootstrap-server kafka:9092 --list
-      "
+    command: >
+      "sleep 20 &&
+      echo 'Creando tópicos...' &&
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic domain.events --partitions 3 --replication-factor 1 &&
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic domain.events.enriched --partitions 3 --replication-factor 1 &&
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic domain.event.dlt --partitions 1 --replication-factor 1 &&
+      echo 'Tópicos creados:' &&
+      kafka-topics --bootstrap-server kafka:29092 --list"
 
   postgres:
     image: postgres:16-alpine
     container_name: postgres
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: kafkaplatform
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=kafkaplatform
     ports:
       - "5432:5432"
     volumes:

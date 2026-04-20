@@ -1,5 +1,6 @@
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\src\main\java\com\kafkaeventdriven\events\BaseEvent.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\src\main\java\com\kafkaeventdriven\events\EventEnrichedEvent.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\src\main\java\com\kafkaeventdriven\events\EventSerializer.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\src\main\java\com\kafkaeventdriven\events\NotificationDispatchedEvent.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\src\main\java\com\kafkaeventdriven\events\OrderCreatedEvent.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\src\main\java\com\kafkaeventdriven\events\OrderItemDto.java

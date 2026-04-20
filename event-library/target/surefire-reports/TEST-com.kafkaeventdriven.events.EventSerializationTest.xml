@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kafkaeventdriven.events.EventSerializationTest" time="0.275" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.kafkaeventdriven.events.EventSerializationTest" time="0.291" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire16584486778942307285\surefirebooter-20260420163718307_3.jar C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire16584486778942307285 2026-04-20T16-37-18_148-jvmRun1 surefire-20260420163718307_1tmp surefire_0-20260420163718307_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire2912959165662955757\surefirebooter-20260420164427499_3.jar C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire2912959165662955757 2026-04-20T16-44-27_367-jvmRun1 surefire-20260420164427499_1tmp surefire_0-20260420164427499_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\target\test-classes;C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-library\target\classes;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.17.0\jackson-databind-2.17.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.17.0\jackson-annotations-2.17.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.17.0\jackson-core-2.17.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\bytebuddy\byte-buddy\1.14.9\byte-buddy-1.14.9.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.17.0\jackson-datatype-jsr310-2.17.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire16584486778942307285\surefirebooter-20260420163718307_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire2912959165662955757\surefirebooter-20260420164427499_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.9+7-LTS-338"/>
@@ -58,10 +58,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="shouldSerializeAndDeserializeEnrichedEvent" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.112"/>
-  <testcase name="shouldSerializeAndDeserializeOrderCreatedEvent" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.016">
-    <system-out><![CDATA[JSON Result: {"eventId":"7e712620-42b0-4897-85db-1b5d7cea0669","eventType":"ORDER_CREATED","occurredAt":1776699439.075705400,"publishedAt":null,"source":"domain-service","correlationId":null,"version":"v1","orderId":"96344f2f-889f-420a-92b9-c679a328b8b3","customerId":"18e67cd5-e062-4b42-a304-562dacebc138","customerEmail":"test@example.com","items":[{"productId":"6a4ea4c2-9915-40cc-ac15-4ade72bb1744","productName":"Teclado Mecánico","quantity":1,"unitPrice":150.50}],"totalAmount":150.50,"status":"PENDING"}
+  <testcase name="shouldSerializeAndDeserializeEnrichedEvent" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.114"/>
+  <testcase name="shouldSerializeInstantAsIso8601" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.006"/>
+  <testcase name="shouldSerializeAndDeserializeOrderCreatedEvent" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.027">
+    <system-out><![CDATA[JSON Result: {"eventId":"d999689d-7cfc-41d9-ae63-cf334dc3efac","eventType":"ORDER_CREATED","occurredAt":1776699868.236187600,"publishedAt":null,"source":"domain-service","correlationId":null,"version":"v1","orderId":"b3d2b6f5-6682-4776-b507-a4c3a7195ca9","customerId":"5b4f103b-5814-4913-bb7d-d7513be9b41e","customerEmail":"test@example.com","items":[{"productId":"5ae86e7c-bb67-4d40-9706-7fecab5f7b6e","productName":"Teclado Mecánico","quantity":1,"unitPrice":150.50}],"totalAmount":150.50,"status":"PENDING"}
 ]]></system-out>
   </testcase>
-  <testcase name="shouldSerializeAndDeserializeNotificationEvent" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.007"/>
+  <testcase name="shouldSerializeAndDeserializeNotificationEvent" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.006"/>
+  <testcase name="shouldIgnoreUnknownProperties" classname="com.kafkaeventdriven.events.EventSerializationTest" time="0.003"/>
 </testsuite>

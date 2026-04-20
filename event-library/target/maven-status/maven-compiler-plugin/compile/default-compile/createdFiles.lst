@@ -1,6 +1,7 @@
 com\kafkaeventdriven\events\NotificationDispatchedEvent.class
 com\kafkaeventdriven\events\ProductUpdatedEvent$ProductUpdatedEventBuilderImpl.class
 com\kafkaeventdriven\events\BaseEvent.class
+com\kafkaeventdriven\events\EventSerializer.class
 com\kafkaeventdriven\events\OrderCreatedEvent.class
 com\kafkaeventdriven\events\OrderCreatedEvent$OrderCreatedEventBuilder.class
 com\kafkaeventdriven\events\OrderStatusChangedEvent$OrderStatusChangedEventBuilder.class

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,4 +48,39 @@ public class EventSerializationTest {
         assertEquals(1, deserialized.getItems().size());
         assertEquals("Teclado Mecánico", deserialized.getItems().get(0).getProductName());
     }
+
+    @Test
+void shouldSerializeAndDeserializeNotificationEvent() throws Exception {
+    NotificationDispatchedEvent event = NotificationDispatchedEvent.builder()
+            .eventId(UUID.randomUUID())
+            .originalEventId(UUID.randomUUID())
+            .notificationType("EMAIL")
+            .recipient("user@example.com")
+            .status("SENT")
+            .attemptCount(1)
+            .build();
+
+    String json = mapper.writeValueAsString(event);
+    NotificationDispatchedEvent deserialized = mapper.readValue(json, NotificationDispatchedEvent.class);
+
+    assertEquals("NOTIFICATION_DISPATCHED", deserialized.getEventType());
+    assertEquals(1, deserialized.getAttemptCount());
+}
+
+@Test
+void shouldSerializeAndDeserializeEnrichedEvent() throws Exception {
+    Map<String, Object> extraData = Map.of("customerRiskScore", 85, "isVip", true);
+    
+    EventEnrichedEvent event = EventEnrichedEvent.builder()
+            .eventId(UUID.randomUUID())
+                .enrichedFields(extraData)
+            .enrichmentSource("risk-analysis-service")
+            .build();
+
+    String json = mapper.writeValueAsString(event);
+    EventEnrichedEvent deserialized = mapper.readValue(json, EventEnrichedEvent.class);
+
+    assertEquals("risk-analysis-service", deserialized.getEnrichmentSource());
+    assertEquals(85, deserialized.getEnrichedFields().get("customerRiskScore"));
+}
 }

@@ -17,5 +17,6 @@
 
     <modules>
         <module>event-library</module>
+        <module>domain-service</module>
     </modules>
 </project>

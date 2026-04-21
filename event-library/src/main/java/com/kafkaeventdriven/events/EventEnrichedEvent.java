@@ -13,7 +13,7 @@ import java.util.UUID;
 @SuperBuilder
 public class EventEnrichedEvent extends BaseEvent {
     private UUID originalEventId;
-    private Map<String, Object> enrichedFields; // Flexibilidad total para añadir datos
+    private Map<String, Object> enrichedFields; 
     private String enrichmentSource;
 
     {

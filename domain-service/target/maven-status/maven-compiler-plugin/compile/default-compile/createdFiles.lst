@@ -1,0 +1,14 @@
+com\kafkaeventdriven\domain\entities\Product$ProductBuilder.class
+com\kafkaeventdriven\domain\entities\Customer.class
+com\kafkaeventdriven\domain\entities\OrderItem.class
+com\kafkaeventdriven\domain\entities\OrderItem$OrderItemBuilder.class
+com\kafkaeventdriven\domain\repositories\OrderRepository.class
+com\kafkaeventdriven\domain\DomainApplication.class
+com\kafkaeventdriven\domain\entities\Order.class
+com\kafkaeventdriven\domain\entities\OrderStatus.class
+com\kafkaeventdriven\domain\repositories\ProductRepository.class
+com\kafkaeventdriven\domain\repositories\CustomerRepository.class
+com\kafkaeventdriven\domain\entities\Customer$CustomerBuilder.class
+com\kafkaeventdriven\domain\entities\Product.class
+com\kafkaeventdriven\domain\entities\Order$OrderBuilder.class
+com\kafkaeventdriven\domain\entities\ProductStatus.class

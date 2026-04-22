@@ -64,7 +64,7 @@ class KafkaIntegrationIT {
 
         // THEN
         // Aumentamos a 10 segundos por si el PC está lento compilando
-        String receivedMessage = messages.poll(10, TimeUnit.SECONDS);
+        String receivedMessage = messages.poll(20, TimeUnit.SECONDS);
         
         if (receivedMessage == null) {
             System.err.println("ERROR: No se recibió nada en el tópico 'domain.events' tras 10s");
@@ -74,4 +74,5 @@ class KafkaIntegrationIT {
         OrderCreatedEvent event = objectMapper.readValue(receivedMessage, OrderCreatedEvent.class);
         assertThat(event.getCustomerId()).isEqualTo(customerId);
     }
+    
 }

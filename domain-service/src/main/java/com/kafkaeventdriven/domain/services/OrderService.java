@@ -9,6 +9,7 @@ import com.kafkaeventdriven.events.OrderCreatedEvent;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -28,7 +30,7 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final KafkaEventPublisher eventPublisher;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public OrderResponse createOrder(OrderRequest request) {
         // 1. Validar que el cliente existe
         Customer customer = customerRepository.findById(request.customerId())
@@ -71,9 +73,17 @@ public class OrderService {
                 savedOrder.getCustomer().getId(),
                 savedOrder.getTotalAmount()
                 );
-
-                // 3. Publicar (Criterio: Si falla Kafka, no revierte BD)
-                eventPublisher.publish(event, null);
+                // 6. Publicar en Kafka dentro de la transacción
+        try {
+            eventPublisher.publish(event, null);
+            log.debug("Publicación exitosa en Kafka para el pedido: {}", savedOrder.getId());
+        } catch (Exception e) {
+            log.error("Fallo al publicar en Kafka para el pedido: {}", savedOrder.getId(), e);
+            // TODO: Limitación de consistencia. Aunque Kafka falle y lancemos excepción,
+            // existe el riesgo de "Dual Write". Ver OUTBOX-1.
+            
+            throw new RuntimeException("Kafka Failure - Rolling back DB", e); // Lanzamos la excepción para forzar el ROLLBACK de la BD
+        }
         return mapToResponse(savedOrder);
     }
 

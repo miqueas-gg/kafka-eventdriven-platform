@@ -1,0 +1,16 @@
+app:
+  kafka:
+    topic-name: domain.events
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kafkaplatform
+    username: admin 
+    password: admin
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false

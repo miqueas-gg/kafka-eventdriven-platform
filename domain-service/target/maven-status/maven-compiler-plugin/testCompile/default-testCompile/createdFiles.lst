@@ -1,0 +1,3 @@
+com\kafkaeventdriven\domain\infrastructure\kafka\KafkaIntegrationIT.class
+com\kafkaeventdriven\domain\controllers\OrderControllerIT.class
+com\kafkaeventdriven\domain\infrastructure\kafka\KafkaEventPublisherTest.class

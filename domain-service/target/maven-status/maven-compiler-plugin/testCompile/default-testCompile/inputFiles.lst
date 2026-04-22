@@ -1,1 +1,3 @@
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\test\java\com\kafkaeventdriven\domain\controllers\OrderControllerIT.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\test\java\com\kafkaeventdriven\domain\infrastructure\kafka\KafkaEventPublisherTest.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\test\java\com\kafkaeventdriven\domain\infrastructure\kafka\KafkaIntegrationIT.java

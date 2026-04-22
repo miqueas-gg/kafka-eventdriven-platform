@@ -3,7 +3,10 @@ package com.kafkaeventdriven.domain.services;
 import com.kafkaeventdriven.domain.dtos.*;
 import com.kafkaeventdriven.domain.entities.*;
 import com.kafkaeventdriven.domain.exceptions.InvalidStateTransitionException;
+import com.kafkaeventdriven.domain.infrastructure.kafka.KafkaEventPublisher;
 import com.kafkaeventdriven.domain.repositories.*;
+import com.kafkaeventdriven.events.OrderCreatedEvent;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
+    private final KafkaEventPublisher eventPublisher;
 
     @Transactional
     public OrderResponse createOrder(OrderRequest request) {
@@ -62,7 +66,14 @@ public class OrderService {
 
         // 5. Guardar en DB (Cascada guardará los items automáticamente)
         Order savedOrder = orderRepository.save(order);
+        OrderCreatedEvent event = new OrderCreatedEvent(
+                savedOrder.getId().toString(),
+                savedOrder.getCustomer().getId(),
+                savedOrder.getTotalAmount()
+                );
 
+                // 3. Publicar (Criterio: Si falla Kafka, no revierte BD)
+                eventPublisher.publish(event, null);
         return mapToResponse(savedOrder);
     }
 

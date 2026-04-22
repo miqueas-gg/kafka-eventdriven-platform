@@ -16,6 +16,7 @@ com\kafkaeventdriven\domain\entities\Product$ProductBuilder.class
 com\kafkaeventdriven\domain\exceptions\GlobalExceptionHandler.class
 com\kafkaeventdriven\domain\entities\Customer.class
 com\kafkaeventdriven\domain\dtos\OrderItemRequest.class
+com\kafkaeventdriven\domain\infrastructure\kafka\KafkaEventPublisher.class
 com\kafkaeventdriven\domain\repositories\OrderRepository.class
 com\kafkaeventdriven\domain\DomainApplication.class
 com\kafkaeventdriven\domain\repositories\CustomerRepository.class

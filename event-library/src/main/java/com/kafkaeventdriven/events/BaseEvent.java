@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @SuperBuilder
 public abstract class BaseEvent {
-
+    private String aggregateId;
     private UUID eventId;
     private String eventType;
     private Instant occurredAt;

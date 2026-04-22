@@ -12,7 +12,7 @@ C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\ProductStatus.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\exceptions\GlobalExceptionHandler.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\exceptions\InvalidStateTransitionException.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\CustomerRepository.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\OrderRepository.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\ProductRepository.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\OrderService.java
-C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\repositories\CustomerRepository.java
-C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\repositories\OrderRepository.java
-C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\repositories\ProductRepository.java

@@ -4,6 +4,7 @@ import com.kafkaeventdriven.domain.dtos.OrderRequest;
 import com.kafkaeventdriven.domain.dtos.OrderResponse;
 import com.kafkaeventdriven.domain.entities.OrderStatus;
 import com.kafkaeventdriven.domain.services.OrderService;
+import com.kafkaeventdriven.domain.dtos.UpdateStatusRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -47,8 +48,8 @@ public class OrderController {
     @PatchMapping("/{id}/status")
     public ResponseEntity<Void> updateStatus(
             @PathVariable UUID id, 
-            @RequestParam OrderStatus status) {
-        orderService.updateStatus(id, status);
+            @RequestBody UpdateStatusRequest request){
+        orderService.changeOrderStatus(id, request);
         return ResponseEntity.noContent().build(); // 204 No Content es estándar para actualizaciones exitosas
     }
 }

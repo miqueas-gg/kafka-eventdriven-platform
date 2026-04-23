@@ -6,6 +6,7 @@ import com.kafkaeventdriven.domain.exceptions.InvalidStateTransitionException;
 import com.kafkaeventdriven.domain.infrastructure.kafka.KafkaEventPublisher;
 import com.kafkaeventdriven.domain.repositories.*;
 import com.kafkaeventdriven.events.OrderCreatedEvent;
+import com.kafkaeventdriven.events.OrderStatusChangedEvent;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -140,5 +141,57 @@ public class OrderService {
     public Page<OrderResponse> getAllOrders(Pageable pageable) {
         return orderRepository.findAll(pageable)
                 .map(this::mapToResponse);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void changeOrderStatus(UUID orderId, UpdateStatusRequest request) {
+        // 1. Buscamos el pedido
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found: " + orderId));
+
+        String previousStatus = order.getStatus().toString();
+        
+        // 2. Validación de lógica de negocio (Criterio de Aceptación)
+        // Si falla aquí, lanza la excepción ANTES de tocar Kafka
+        validateTransition(previousStatus, request.newStatus());
+
+        // 3. Actualizamos en Base de Datos
+        order.setStatus(OrderStatus.valueOf(request.newStatus()));
+        orderRepository.save(order);
+
+        // 4. Construimos el evento usando SuperBuilder
+        // Al heredar de BaseEvent, puedes setear correlationId y source aquí mismo
+        OrderStatusChangedEvent event = OrderStatusChangedEvent.builder()
+                .orderId(orderId)
+                .previousStatus(previousStatus)
+                .newStatus(request.newStatus())
+                .reason(request.reason())
+                .correlationId(UUID.randomUUID()) // Campo heredado
+                .source("domain-service")                    // Campo heredado
+                .eventType("ORDER_STATUS_CHANGED")           // Campo heredado
+                .build();
+
+        // 5. Publicamos
+        try {
+            eventPublisher.publish(event, "domain.events");
+        } catch (Exception e) {
+            log.error("Error al publicar cambio de estado", e);
+            // Hacemos un wrap de la excepción para asegurar el Rollback de la BD
+            throw new RuntimeException("Kafka failure - Rolling back status change", e);
+        }
+    }
+
+    private void validateTransition(String current, String next) {
+        // Ejemplo de validación: si el pedido está CANCELADO, no puedes moverlo a otro estado
+        if ("CANCELLED".equals(current) || "COMPLETED".equals(current)) {
+            throw new IllegalArgumentException("No se puede cambiar el estado de un pedido finalizado (" + current + ")");
+        }
+        
+        // Validar que el nuevo estado sea válido (evita errores de Enum.valueOf)
+        try {
+            OrderStatus.valueOf(next);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Estado de destino no válido: " + next);
+        }
     }
 }

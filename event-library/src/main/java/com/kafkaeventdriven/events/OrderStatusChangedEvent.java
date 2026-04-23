@@ -13,6 +13,7 @@ public class OrderStatusChangedEvent extends BaseEvent {
     private String previousStatus;
     private String newStatus;
     private String reason;
+ 
 
     {
         setEventType("ORDER_STATUS_CHANGED");

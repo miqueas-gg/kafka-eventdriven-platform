@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.kafkaeventdriven.domain.infrastructure.kafka.IdempotencyServiceIT" time="6.756" tests="2" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\target\test-classes;C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\target\classes;C:\Users\shhernandez.INDRA\.m2\repository\com\kafkaeventdriven\event-library\1.0-SNAPSHOT\event-library-1.0-SNAPSHOT.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.5\spring-boot-starter-web-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.5\spring-boot-starter-json-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.5\spring-boot-starter-tomcat-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.20\tomcat-embed-core-10.1.20.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.20\tomcat-embed-websocket-10.1.20.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-web\6.1.6\spring-web-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-webmvc\6.1.6\spring-webmvc-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.2.5\spring-boot-starter-data-jpa-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.2.5\spring-boot-starter-aop-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.5\spring-boot-starter-jdbc-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-jdbc\6.1.6\spring-jdbc-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hibernate\orm\hibernate-core\6.4.4.Final\hibernate-core-6.4.4.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\data\spring-data-jpa\3.2.5\spring-data-jpa-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\data\spring-data-commons\3.2.5\spring-data-commons-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-orm\6.1.6\spring-orm-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-aspects\6.1.6\spring-aspects-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.5\spring-boot-starter-validation-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.20\tomcat-embed-el-10.1.20.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\postgresql\postgresql\42.6.2\postgresql-42.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\checkerframework\checker-qual\3.31.0\checker-qual-3.31.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\flywaydb\flyway-core\9.22.3\flyway-core-9.22.3.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-toml\2.15.4\jackson-dataformat-toml-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\kafka\spring-kafka\3.1.4\spring-kafka-3.1.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-messaging\6.1.6\spring-messaging-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-tx\6.1.6\spring-tx-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\retry\spring-retry\2.0.5\spring-retry-2.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-clients\3.6.2\kafka-clients-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\github\luben\zstd-jni\1.5.5-1\zstd-jni-1.5.5-1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\lz4\lz4-java\1.8.0\lz4-java-1.8.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\xerial\snappy\snappy-java\1.1.10.5\snappy-java-1.1.10.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\kafka\spring-kafka-test\3.1.4\spring-kafka-test-3.1.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\zookeeper\zookeeper\3.8.4\zookeeper-3.8.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\zookeeper\zookeeper-jute\3.8.4\zookeeper-jute-3.8.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\yetus\audience-annotations\0.12.0\audience-annotations-0.12.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-handler\4.1.109.Final\netty-handler-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-common\4.1.109.Final\netty-common-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-resolver\4.1.109.Final\netty-resolver-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-buffer\4.1.109.Final\netty-buffer-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport\4.1.109.Final\netty-transport-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.109.Final\netty-transport-native-unix-common-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-codec\4.1.109.Final\netty-codec-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport-native-epoll\4.1.109.Final\netty-transport-native-epoll-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.109.Final\netty-transport-classes-epoll-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\shhernandez.INDRA\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-clients\3.6.2\kafka-clients-3.6.2-test.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-metadata\3.6.2\kafka-metadata-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-raft\3.6.2\kafka-raft-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\yammer\metrics\metrics-core\2.2.0\metrics-core-2.2.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-server-common\3.6.2\kafka-server-common-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\sf\jopt-simple\jopt-simple\5.0.4\jopt-simple-5.0.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\pcollections\pcollections\4.0.1\pcollections-4.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-server-common\3.6.2\kafka-server-common-3.6.2-test.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-streams-test-utils\3.6.2\kafka-streams-test-utils-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-streams\3.6.2\kafka-streams-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\rocksdb\rocksdbjni\7.9.2\rocksdbjni-7.9.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka_2.13\3.6.2\kafka_2.13-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\scala-library\2.13.11\scala-library-2.13.11.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-group-coordinator\3.6.2\kafka-group-coordinator-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-storage-api\3.6.2\kafka-storage-api-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-tools-api\3.6.2\kafka-tools-api-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-storage\3.6.2\kafka-storage-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\github\ben-manes\caffeine\caffeine\3.1.8\caffeine-3.1.8.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\google\errorprone\error_prone_annotations\2.21.1\error_prone_annotations-2.21.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\sourceforge\argparse4j\argparse4j\0.7.0\argparse4j-0.7.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-validator\commons-validator\1.7\commons-validator-1.7.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-beanutils\commons-beanutils\1.9.4\commons-beanutils-1.9.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-digester\commons-digester\2.1\commons-digester-2.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-collections\commons-collections\3.2.2\commons-collections-3.2.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\module\jackson-module-scala_2.13\2.15.4\jackson-module-scala_2.13-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\thoughtworks\paranamer\paranamer\2.8\paranamer-2.8.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-csv\2.15.4\jackson-dataformat-csv-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\bitbucket\b_c\jose4j\0.9.4\jose4j-0.9.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\modules\scala-collection-compat_2.13\2.10.0\scala-collection-compat_2.13-2.10.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\modules\scala-java8-compat_2.13\1.0.2\scala-java8-compat_2.13-1.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\scala-reflect\2.13.11\scala-reflect-2.13.11.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\typesafe\scala-logging\scala-logging_2.13\3.9.4\scala-logging_2.13-3.9.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\dropwizard\metrics\metrics-core\4.2.25\metrics-core-4.2.25.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka_2.13\3.6.2\kafka_2.13-3.6.2-test.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-launcher\1.10.2\junit-platform-launcher-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Atlantic/Canary"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
+    <property name="sun.java.command" value="C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire9911403387811687962\surefirebooter-20260423150054802_3.jar C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire9911403387811687962 2026-04-23T15-00-54_656-jvmRun1 surefire-20260423150054802_1tmp surefire_0-20260423150054802_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\target\test-classes;C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\target\classes;C:\Users\shhernandez.INDRA\.m2\repository\com\kafkaeventdriven\event-library\1.0-SNAPSHOT\event-library-1.0-SNAPSHOT.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.5\spring-boot-starter-web-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.5\spring-boot-starter-json-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.5\spring-boot-starter-tomcat-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.20\tomcat-embed-core-10.1.20.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.20\tomcat-embed-websocket-10.1.20.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-web\6.1.6\spring-web-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-webmvc\6.1.6\spring-webmvc-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.2.5\spring-boot-starter-data-jpa-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.2.5\spring-boot-starter-aop-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.5\spring-boot-starter-jdbc-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-jdbc\6.1.6\spring-jdbc-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hibernate\orm\hibernate-core\6.4.4.Final\hibernate-core-6.4.4.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\data\spring-data-jpa\3.2.5\spring-data-jpa-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\data\spring-data-commons\3.2.5\spring-data-commons-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-orm\6.1.6\spring-orm-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-aspects\6.1.6\spring-aspects-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.5\spring-boot-starter-validation-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.20\tomcat-embed-el-10.1.20.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\postgresql\postgresql\42.6.2\postgresql-42.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\checkerframework\checker-qual\3.31.0\checker-qual-3.31.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\flywaydb\flyway-core\9.22.3\flyway-core-9.22.3.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-toml\2.15.4\jackson-dataformat-toml-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\kafka\spring-kafka\3.1.4\spring-kafka-3.1.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-messaging\6.1.6\spring-messaging-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\spring-tx\6.1.6\spring-tx-6.1.6.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\retry\spring-retry\2.0.5\spring-retry-2.0.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-clients\3.6.2\kafka-clients-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\github\luben\zstd-jni\1.5.5-1\zstd-jni-1.5.5-1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\lz4\lz4-java\1.8.0\lz4-java-1.8.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\xerial\snappy\snappy-java\1.1.10.5\snappy-java-1.1.10.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\springframework\kafka\spring-kafka-test\3.1.4\spring-kafka-test-3.1.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\zookeeper\zookeeper\3.8.4\zookeeper-3.8.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\zookeeper\zookeeper-jute\3.8.4\zookeeper-jute-3.8.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\yetus\audience-annotations\0.12.0\audience-annotations-0.12.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-handler\4.1.109.Final\netty-handler-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-common\4.1.109.Final\netty-common-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-resolver\4.1.109.Final\netty-resolver-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-buffer\4.1.109.Final\netty-buffer-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport\4.1.109.Final\netty-transport-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.109.Final\netty-transport-native-unix-common-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-codec\4.1.109.Final\netty-codec-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport-native-epoll\4.1.109.Final\netty-transport-native-epoll-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.109.Final\netty-transport-classes-epoll-4.1.109.Final.jar;C:\Users\shhernandez.INDRA\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\shhernandez.INDRA\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-clients\3.6.2\kafka-clients-3.6.2-test.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-metadata\3.6.2\kafka-metadata-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-raft\3.6.2\kafka-raft-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\yammer\metrics\metrics-core\2.2.0\metrics-core-2.2.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-server-common\3.6.2\kafka-server-common-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\sf\jopt-simple\jopt-simple\5.0.4\jopt-simple-5.0.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\pcollections\pcollections\4.0.1\pcollections-4.0.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-server-common\3.6.2\kafka-server-common-3.6.2-test.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-streams-test-utils\3.6.2\kafka-streams-test-utils-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-streams\3.6.2\kafka-streams-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\rocksdb\rocksdbjni\7.9.2\rocksdbjni-7.9.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka_2.13\3.6.2\kafka_2.13-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\scala-library\2.13.11\scala-library-2.13.11.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-group-coordinator\3.6.2\kafka-group-coordinator-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-storage-api\3.6.2\kafka-storage-api-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-tools-api\3.6.2\kafka-tools-api-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka-storage\3.6.2\kafka-storage-3.6.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\github\ben-manes\caffeine\caffeine\3.1.8\caffeine-3.1.8.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\google\errorprone\error_prone_annotations\2.21.1\error_prone_annotations-2.21.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\net\sourceforge\argparse4j\argparse4j\0.7.0\argparse4j-0.7.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-validator\commons-validator\1.7\commons-validator-1.7.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-beanutils\commons-beanutils\1.9.4\commons-beanutils-1.9.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-digester\commons-digester\2.1\commons-digester-2.1.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-collections\commons-collections\3.2.2\commons-collections-3.2.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\module\jackson-module-scala_2.13\2.15.4\jackson-module-scala_2.13-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\thoughtworks\paranamer\paranamer\2.8\paranamer-2.8.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-csv\2.15.4\jackson-dataformat-csv-2.15.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\bitbucket\b_c\jose4j\0.9.4\jose4j-0.9.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\modules\scala-collection-compat_2.13\2.10.0\scala-collection-compat_2.13-2.10.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\modules\scala-java8-compat_2.13\1.0.2\scala-java8-compat_2.13-1.0.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\scala-lang\scala-reflect\2.13.11\scala-reflect-2.13.11.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\typesafe\scala-logging\scala-logging_2.13\3.9.4\scala-logging_2.13-3.9.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\io\dropwizard\metrics\metrics-core\4.2.25\metrics-core-4.2.25.jar;C:\Users\shhernandez.INDRA\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apache\kafka\kafka_2.13\3.6.2\kafka_2.13-3.6.2-test.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-launcher\1.10.2\junit-platform-launcher-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\shhernandez.INDRA\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;"/>
+    <property name="test" value="IdempotencyServiceIT"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\shhernandez.INDRA"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-21"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\shhernandez.INDRA\AppData\Local\Temp\surefire9911403387811687962\surefirebooter-20260423150054802_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.9+7-LTS-338"/>
+    <property name="user.name" value="shhernandez"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\shhernandez.INDRA\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\SHHERN~1.IND\AppData\Local\Temp\"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="java.version" value="21.0.9"/>
+    <property name="user.dir" value="C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="12420"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\shhernandez.INDRA\AppData\Local\Programs\Microsoft VS Code;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\apache-maven-3.9.14\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\shhernandez.INDRA\AppData\Local\Microsoft\WindowsApps;C:\Curso\Java\jdk-17.0.12_windows-x64_bin\jdk-17.0.12\bin;C:\apache-maven-3.9.14\bin;C:\Users\shhernandez.INDRA\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\shhernandez.INDRA\AppData\Roaming\npm;C:\Program Files\nodejs\;C:\Users\shhernandez.INDRA\AppData\Roaming\npm;c:\Users\shhernandez.INDRA\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="21.0.9+7-LTS-338"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[domain-service] "/>
+  </properties>
+  <testcase name="shouldDetectDuplicateEvents" classname="com.kafkaeventdriven.domain.infrastructure.kafka.IdempotencyServiceIT" time="0.957">
+    <system-out><![CDATA[15:00:55.872 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.kafkaeventdriven.domain.infrastructure.kafka.IdempotencyServiceIT]: IdempotencyServiceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:00:55.994 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.kafkaeventdriven.domain.DomainApplication for test class com.kafkaeventdriven.domain.infrastructure.kafka.IdempotencyServiceIT
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-04-23T15:00:56.385+01:00  INFO 12420 --- [domain-service] [           main] c.k.d.i.kafka.IdempotencyServiceIT       : Starting IdempotencyServiceIT using Java 21.0.9 with PID 12420 (started by shhernandez in C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service)
+2026-04-23T15:00:56.387+01:00  INFO 12420 --- [domain-service] [           main] c.k.d.i.kafka.IdempotencyServiceIT       : The following 1 profile is active: "test"
+2026-04-23T15:00:57.376+01:00  INFO 12420 --- [domain-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T15:00:57.459+01:00  INFO 12420 --- [domain-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 4 JPA repository interfaces.
+2026-04-23T15:00:58.230+01:00  INFO 12420 --- [domain-service] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-23T15:00:58.316+01:00  INFO 12420 --- [domain-service] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-23T15:00:58.371+01:00  INFO 12420 --- [domain-service] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-23T15:00:58.636+01:00  INFO 12420 --- [domain-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T15:00:58.653+01:00  INFO 12420 --- [domain-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T15:00:58.789+01:00  INFO 12420 --- [domain-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-04-23T15:00:58.791+01:00  INFO 12420 --- [domain-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T15:00:58.806+01:00  WARN 12420 --- [domain-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-23T15:00:59.769+01:00  INFO 12420 --- [domain-service] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    drop table if exists domain.customers cascade 
+Hibernate: 
+    drop table if exists domain.order_items cascade 
+Hibernate: 
+    drop table if exists domain.orders cascade 
+Hibernate: 
+    drop table if exists domain.processed_events cascade 
+Hibernate: 
+    drop table if exists domain.products cascade 
+Hibernate: 
+    create table domain.customers (
+        created_at timestamp(6) with time zone not null,
+        updated_at timestamp(6) with time zone not null,
+        id uuid not null,
+        phone varchar(20),
+        name varchar(150) not null,
+        email varchar(255) not null unique,
+        address jsonb,
+        primary key (id)
+    )
+Hibernate: 
+    create table domain.order_items (
+        quantity integer not null,
+        subtotal numeric(38,2),
+        unit_price numeric(38,2) not null,
+        id uuid not null,
+        order_id uuid not null,
+        product_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table domain.orders (
+        total_amount numeric(38,2) not null,
+        created_at timestamp(6) with time zone not null,
+        updated_at timestamp(6) with time zone not null,
+        customer_id uuid not null,
+        id uuid not null,
+        notes TEXT,
+        status varchar(255) not null check (status in ('PENDING','CONFIRMED','VALIDATED','CANCELLED','PAID','SHIPPED')),
+        primary key (id)
+    )
+Hibernate: 
+    create table domain.processed_events (
+        processed_at timestamp(6) with time zone,
+        event_id uuid not null,
+        event_type varchar(255),
+        primary key (event_id)
+    )
+Hibernate: 
+    create table domain.products (
+        price numeric(38,2),
+        stock integer,
+        created_at timestamp(6) with time zone,
+        updated_at timestamp(6) with time zone,
+        id uuid not null,
+        category varchar(255),
+        description varchar(255),
+        name varchar(255),
+        status varchar(255) check (status in ('ACTIVE','INACTIVE','OUT_OF_STOCK')),
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists domain.order_items 
+       add constraint FKbioxgbv59vetrxe0ejfubep1w 
+       foreign key (order_id) 
+       references domain.orders
+Hibernate: 
+    alter table if exists domain.order_items 
+       add constraint FKocimc7dtr037rh4ls4l95nlfi 
+       foreign key (product_id) 
+       references domain.products
+Hibernate: 
+    alter table if exists domain.orders 
+       add constraint FKpxtb8awmi0dk6smoh2vp1litg 
+       foreign key (customer_id) 
+       references domain.customers
+2026-04-23T15:00:59.864+01:00  INFO 12420 --- [domain-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T15:01:00.872+01:00  WARN 12420 --- [domain-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23T15:01:01.391+01:00  INFO 12420 --- [domain-service] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-04-23T15:01:01.499+01:00  INFO 12420 --- [domain-service] [           main] c.k.d.i.kafka.IdempotencyServiceIT       : Started IdempotencyServiceIT in 5.371 seconds (process running for 6.428)
+Hibernate: 
+    select
+        pe1_0.event_id,
+        pe1_0.event_type,
+        pe1_0.processed_at 
+    from
+        domain.processed_events pe1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+Hibernate: 
+    select
+        pe1_0.event_id,
+        pe1_0.event_type,
+        pe1_0.processed_at 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+2026-04-23T15:01:02.460+01:00  INFO 12420 --- [domain-service] [           main] c.k.domain.services.IdempotencyService   : Evento 7de0fe5d-6991-428a-9a62-00598bc9d48f de tipo ORDER_CREATED marcado como procesado.
+Hibernate: 
+    insert 
+    into
+        domain.processed_events
+        (event_type, processed_at, event_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+]]></system-out>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\shhernandez.INDRA\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="shouldNotFailWhenMarkingAsProcessedTwice" classname="com.kafkaeventdriven.domain.infrastructure.kafka.IdempotencyServiceIT" time="0.026">
+    <system-out><![CDATA[Hibernate: 
+    select
+        pe1_0.event_id,
+        pe1_0.event_type,
+        pe1_0.processed_at 
+    from
+        domain.processed_events pe1_0
+Hibernate: 
+    delete 
+    from
+        domain.processed_events 
+    where
+        event_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+Hibernate: 
+    select
+        pe1_0.event_id,
+        pe1_0.event_type,
+        pe1_0.processed_at 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+2026-04-23T15:01:02.503+01:00  INFO 12420 --- [domain-service] [           main] c.k.domain.services.IdempotencyService   : Evento df926e7d-51c0-4a99-a564-e8ad1019a525 de tipo TEST_TYPE marcado como procesado.
+Hibernate: 
+    insert 
+    into
+        domain.processed_events
+        (event_type, processed_at, event_id) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+2026-04-23T15:01:02.505+01:00  INFO 12420 --- [domain-service] [           main] c.k.domain.services.IdempotencyService   : El evento df926e7d-51c0-4a99-a564-e8ad1019a525 ya estaba marcado como procesado. Ignorando...
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0 
+    where
+        pe1_0.event_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        domain.processed_events pe1_0
+]]></system-out>
+  </testcase>
+</testsuite>

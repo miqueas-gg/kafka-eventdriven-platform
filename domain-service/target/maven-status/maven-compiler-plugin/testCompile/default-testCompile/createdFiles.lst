@@ -4,3 +4,4 @@ com\kafkaeventdriven\domain\infrastructure\kafka\ProductIntegrationIT.class
 com\kafkaeventdriven\domain\infrastructure\kafka\KafkaFailureRecoveryIT.class
 com\kafkaeventdriven\domain\infrastructure\kafka\KafkaIntegrationIT.class
 com\kafkaeventdriven\domain\infrastructure\kafka\OrderStatusIntegrationIT.class
+com\kafkaeventdriven\domain\infrastructure\kafka\IdempotencyServiceIT.class

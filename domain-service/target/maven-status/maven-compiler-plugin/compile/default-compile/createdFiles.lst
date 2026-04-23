@@ -1,10 +1,13 @@
 com\kafkaeventdriven\domain\controllers\OrderController.class
+com\kafkaeventdriven\domain\entities\ProcessedEvent$ProcessedEventBuilder.class
+com\kafkaeventdriven\domain\services\IdempotencyService.class
 com\kafkaeventdriven\domain\services\OrderService$1.class
 com\kafkaeventdriven\domain\entities\OrderItem.class
 com\kafkaeventdriven\domain\entities\OrderItem$OrderItemBuilder.class
 com\kafkaeventdriven\domain\services\OrderService.class
 com\kafkaeventdriven\domain\entities\Order.class
 com\kafkaeventdriven\domain\entities\OrderStatus.class
+com\kafkaeventdriven\domain\entities\ProcessedEvent.class
 com\kafkaeventdriven\domain\repositories\ProductRepository.class
 com\kafkaeventdriven\domain\dtos\OrderItemResponse.class
 com\kafkaeventdriven\domain\dtos\OrderResponse.class
@@ -23,6 +26,7 @@ com\kafkaeventdriven\domain\repositories\OrderRepository.class
 com\kafkaeventdriven\domain\DomainApplication.class
 com\kafkaeventdriven\domain\controllers\ProductController.class
 com\kafkaeventdriven\domain\repositories\CustomerRepository.class
+com\kafkaeventdriven\domain\repositories\ProcessedEventRepository.class
 com\kafkaeventdriven\domain\services\ProductService.class
 com\kafkaeventdriven\domain\exceptions\InvalidStateTransitionException.class
 com\kafkaeventdriven\domain\entities\Product.class

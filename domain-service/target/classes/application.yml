@@ -29,18 +29,27 @@ spring:
     default-schema: domain
     create-schemas: true
     locations: classpath:db/migration
-    logging:
-     level:
-      org.flywaydb: DEBUG
-  spring:
-    kafka:
-      bootstrap-servers: localhost:9092
-      producer:
-        key-serializer: org.apache.kafka.common.serialization.StringSerializer
-        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-        properties:
-          spring.json.add.type.headers: false
-
-  app:
-    kafka:
-      topic-name: domain.events
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+management:
+  server:
+    port: 8082          # Puerto diferente para Actuator (8082)
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info  # Habilitamos los necesarios
+  endpoint:
+    health:
+      show-details: always              # Muestra estado de DB y Kafka
+  metrics:
+    tags:
+      application: ${spring.application.name}
+   
+app:
+  kafka:
+     topic-name: domain.events

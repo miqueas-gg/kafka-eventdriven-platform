@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Counter;
 
 @Slf4j
 @Component
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class KafkaEventPublisher {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final MeterRegistry meterRegistry;
 
     @Value("${app.kafka.topic-name}")
     private String defaultTopic;
@@ -30,6 +33,11 @@ public class KafkaEventPublisher {
                         log.error("Error al publicar en Kafka (Fire-and-forget): {}", ex.getMessage());
                     } else {
                         log.info("Evento publicado con éxito en offset {}", result.getRecordMetadata().offset());
+                        Counter.builder("domain.events.published")
+                            .description("Total de eventos publicados con éxito a Kafka")
+                            .tag("event_type", event.getEventType())
+                            .register(meterRegistry)
+                            .increment();
                     }
                 });
             }catch(Exception e){

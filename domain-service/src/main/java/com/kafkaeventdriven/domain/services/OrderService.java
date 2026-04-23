@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Counter;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,6 +32,7 @@ public class OrderService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final KafkaEventPublisher eventPublisher;
+    private final MeterRegistry meterRegistry;
 
     @Transactional(rollbackFor = Exception.class)
     public OrderResponse createOrder(OrderRequest request) {
@@ -69,6 +72,7 @@ public class OrderService {
 
         // 5. Guardar en DB (Cascada guardará los items automáticamente)
         Order savedOrder = orderRepository.save(order);
+        meterRegistry.counter("domain.orders.created").increment();
         OrderCreatedEvent event = new OrderCreatedEvent(
                 savedOrder.getId().toString(),
                 savedOrder.getCustomer().getId(),
@@ -158,6 +162,10 @@ public class OrderService {
         // 3. Actualizamos en Base de Datos
         order.setStatus(OrderStatus.valueOf(request.newStatus()));
         orderRepository.save(order);
+        Counter.builder("domain.orders.status_changed")
+                        .tag("new_status", request.newStatus())
+                        .register(meterRegistry)
+                        .increment();
 
         // 4. Construimos el evento usando SuperBuilder
         // Al heredar de BaseEvent, puedes setear correlationId y source aquí mismo

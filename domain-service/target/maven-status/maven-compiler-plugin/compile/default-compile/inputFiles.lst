@@ -11,9 +11,12 @@ C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\exceptions\InvalidStateTransitionException.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\Customer.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\ProductStatus.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\ProductService.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\OrderService.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\controllers\ProductController.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\OrderRepository.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\dtos\OrderItemRequest.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\dtos\ProductRequest.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\OrderItem.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\dtos\OrderResponse.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\CustomerRepository.java

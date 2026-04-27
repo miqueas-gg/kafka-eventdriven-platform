@@ -2,9 +2,10 @@ package com.kafkaeventdriven.domain.controllers;
 
 import com.kafkaeventdriven.domain.dtos.OrderRequest;
 import com.kafkaeventdriven.domain.dtos.OrderResponse;
-import com.kafkaeventdriven.domain.entities.OrderStatus;
 import com.kafkaeventdriven.domain.services.OrderService;
 import com.kafkaeventdriven.domain.dtos.UpdateStatusRequest;
+
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -4,6 +4,8 @@ import com.kafkaeventdriven.domain.dtos.ProductRequest;
 import com.kafkaeventdriven.domain.entities.Product;
 import com.kafkaeventdriven.domain.services.ProductService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,13 @@ public class ProductController {
     public ResponseEntity<Product> create(@RequestBody ProductRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(request));
     }
+
+    @GetMapping
+    public ResponseEntity<Page<Product>> getAll(
+        @org.springframework.data.web.PageableDefault(size = 10, sort = "name") org.springframework.data.domain.Pageable pageable
+    ) {
+        return ResponseEntity.ok(productService.getAllProducts(pageable));
+    }   
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> get(@PathVariable UUID id) {

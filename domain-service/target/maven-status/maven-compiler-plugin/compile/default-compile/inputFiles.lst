@@ -7,7 +7,9 @@ C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\ProductStatus.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\controllers\ProductController.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\dtos\ProductRequest.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\controllers\CustomerController.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\dtos\OrderRequest.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\CustomerService.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\IdempotencyService.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\ProductRepository.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\Order.java

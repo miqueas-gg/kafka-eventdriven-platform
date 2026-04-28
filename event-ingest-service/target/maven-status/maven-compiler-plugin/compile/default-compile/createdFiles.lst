@@ -1,0 +1,6 @@
+com\kafkaeventdriven\ingest\domain\repositories\EventRepository.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\EventIngestConsumer.class
+com\kafkaeventdriven\ingest\application\services\EventIngestService.class
+com\kafkaeventdriven\ingest\IngestApplication.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\KafkaConfig.class
+com\kafkaeventdriven\ingest\domain\entities\EventEntity.class

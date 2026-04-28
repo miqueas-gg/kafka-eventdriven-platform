@@ -1,0 +1,6 @@
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-ingest-service\src\main\java\com\kafkaeventdriven\ingest\domain\entities\EventEntity.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-ingest-service\src\main\java\com\kafkaeventdriven\ingest\application\services\EventIngestService.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-ingest-service\src\main\java\com\kafkaeventdriven\ingest\domain\repositories\EventRepository.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-ingest-service\src\main\java\com\kafkaeventdriven\ingest\IngestApplication.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-ingest-service\src\main\java\com\kafkaeventdriven\ingest\infrastructure\kafka\EventIngestConsumer.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\event-ingest-service\src\main\java\com\kafkaeventdriven\ingest\infrastructure\kafka\KafkaConfig.java

@@ -23,6 +23,7 @@
     <modules>
         <module>event-library</module>
         <module>domain-service</module>
+        <module>event-ingest-service</module>
     </modules>
 
     <dependencyManagement>

@@ -60,9 +60,18 @@ main        ← releases estables únicamente
 # 1. Levantar infraestructura
 cd infra && docker compose up -d
 
-# 2. Compilar todos los módulos
+#2. Comprobar que los contenedores están 
+docker compose ps
+
+#3. Comprobar que los tópicos se han creado con exito.
+docker exec kafka kafka-topics --bootstrap-server kafka:9092 --list
+
+#4. Comprobar que la base de datos esta levantada y accesible 
+docker exec postgres pg_isready -U admin -d kafkaplatform
+
+# 5. Compilar todos los módulos
 mvn clean install
 
-# 3. Arrancar un servicio
+# 6. Arrancar un servicio
 cd domain-service && mvn spring-boot:run
 ```

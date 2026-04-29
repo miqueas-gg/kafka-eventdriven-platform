@@ -1,0 +1,43 @@
+server:
+  port: 8083 # Puerto diferente al domain-service (que era 8081)
+
+spring:
+  application:
+    name: event-ingest-service
+
+  # Configuración de la Base de Datos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres # Cambia esto si tienes un DB name específico
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate # Flyway se encarga de crear la tabla
+    properties:
+      hibernate:
+        default_schema: events # Esquema separado
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Configuración de Kafka (Requisitos del tutor)
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: event-ingest-group
+      auto-offset-reset: earliest # Leer desde el principio si es un grupo nuevo
+      enable-auto-commit: false    # Requisito: Control manual del offset
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual_immediate # Requisito: Confirmación manual e inmediata
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+# Configuración de logs para ver qué pasa con los eventos
+logging:
+  level:
+    com.kafkaeventdriven.ingest: DEBUG
+    org.springframework.kafka: INFO

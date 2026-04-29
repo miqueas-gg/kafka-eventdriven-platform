@@ -2,7 +2,9 @@ package com.kafkaeventdriven.ingest.application.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kafkaeventdriven.ingest.application.validator.EventValidator;
 import com.kafkaeventdriven.ingest.domain.entities.EventEntity;
+import com.kafkaeventdriven.ingest.domain.exceptions.InvalidEventException;
 import com.kafkaeventdriven.ingest.domain.repositories.EventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,54 +20,54 @@ import java.util.UUID;
 public class EventIngestService {
 
     private final EventRepository eventRepository;
-    private final ObjectMapper objectMapper; // El traductor de JSON de Spring
+    private final ObjectMapper objectMapper;
+    private final EventValidator eventValidator; // <--- Nuevo colaborador
 
     @Transactional
     public void processAndStore(String rawMessage) {
         try {
-            // 1. Convertimos el texto bruto en un objeto JSON (JsonNode)
             JsonNode root = objectMapper.readTree(rawMessage);
-            
-            JsonNode eventIdNode = root.get("eventId");
-            if (eventIdNode == null || eventIdNode.isNull()) {
-                log.error("Saltando mensaje: No tiene eventId");
-                return; // Ignoramos mensajes basura sin ID
-            }
-            // 2. Extraemos el eventId para la Idempotencia
+
+            // 1. VALIDACIÓN: Si falla, lanza InvalidEventException
+            eventValidator.validate(root);
+
+            // 2. EXTRACCIÓN DE ID (Ya sabemos que existe por el validador)
             UUID eventId = UUID.fromString(root.get("eventId").asText());
 
-            // 3. REQUISITO: Comprobar si ya existe (Idempotencia)
+            // 3. IDEMPOTENCIA: Si es duplicado, descartamos silenciosamente (WARN)
             if (eventRepository.existsByEventId(eventId)) {
                 log.warn("Evento duplicado detectado e ignorado: {}", eventId);
-                return;
+                return; 
             }
 
-            // 4. Mapeamos los datos del JSON a nuestra entidad de Base de Datos
+            // 4. MAPEADO (Mucho más limpio ahora que el validador filtró la basura)
             EventEntity entity = new EventEntity();
             entity.setEventId(eventId);
             entity.setEventType(root.get("eventType").asText());
-            entity.setSource(root.has("source") && !root.get("source").isNull() 
-                             ? root.get("source").asText() : "unknown-source");
-            entity.setPayload(root); // Guardamos el JSON completo en la columna JSONB
-            JsonNode dateNode = root.get("occurredAt");
-            if (dateNode.isNumber()) {
-                // Si es un timestamp numérico (como el de tus logs)
-                long seconds = dateNode.asLong();
-                entity.setOccurredAt(java.time.Instant.ofEpochSecond(seconds)
-                        .atZone(java.time.ZoneId.systemDefault()).toLocalDateTime());
-            } else {
-                // Si es un String ISO normal
-                entity.setOccurredAt(LocalDateTime.parse(dateNode.asText()));
-            }
+            entity.setSource(root.get("source").asText());
+            entity.setPayload(root);
+            
+            // Reutilizamos la lógica de fecha flexible por si acaso
+            entity.setOccurredAt(parseOccurredAt(root.get("occurredAt")));
 
-            // 5. Guardamos en la tabla eventstore.events
+            // 5. PERSISTENCIA
             eventRepository.save(entity);
             log.info("Evento guardado con éxito: {} [{}]", eventId, entity.getEventType());
 
+        } catch (InvalidEventException e) {
+            log.error("Validación fallida: {}", e.getMessage());
+            throw e; // La relanzamos para que el Consumer la gestione hacia el DLT
         } catch (Exception e) {
-            log.error("Error al procesar el evento: {}", e.getMessage());
-            // Lanzamos excepción para que Kafka sepa que ha fallado y reintente
+            log.error("Error técnico inesperado al procesar el evento: {}", e.getMessage());
             throw new RuntimeException("Error en la ingesta del evento", e);
         }
+    }
+
+    private LocalDateTime parseOccurredAt(JsonNode dateNode) {
+        if (dateNode.isNumber()) {
+            return java.time.Instant.ofEpochSecond(dateNode.asLong())
+                    .atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
+        }
+        return LocalDateTime.parse(dateNode.asText());
     }
 }

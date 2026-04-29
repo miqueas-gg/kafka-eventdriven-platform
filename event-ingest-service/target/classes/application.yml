@@ -1,13 +1,13 @@
 server:
-  port: 8083 # Puerto diferente al domain-service (que era 8081)
+  port: 8083 
 
 spring:
   application:
     name: event-ingest-service
 
-  # Configuración de la Base de Datos
+  # ... (Tus configuraciones de datasource, jpa y kafka se mantienen igual) ...
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres # Cambia esto si tienes un DB name específico
+    url: jdbc:postgresql://localhost:5432/postgres
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver
@@ -15,28 +15,40 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: validate # Flyway se encarga de crear la tabla
+      ddl-auto: validate 
     properties:
       hibernate:
-        default_schema: events # Esquema separado
+        default_schema: events 
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  # Configuración de Kafka (Requisitos del tutor)
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: event-ingest-group
-      auto-offset-reset: earliest # Leer desde el principio si es un grupo nuevo
-      enable-auto-commit: false    # Requisito: Control manual del offset
+      auto-offset-reset: earliest 
+      enable-auto-commit: false    
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     listener:
-      ack-mode: manual_immediate # Requisito: Confirmación manual e inmediata
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      ack-mode: manual_immediate 
 
-# Configuración de logs para ver qué pasa con los eventos
+# --- AQUÍ EMPIEZA LO NUEVO PARA LA ISSUE 19 ---
+management:
+  server:
+    port: 8084              # Puerto específico para métricas (Requisito)
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus # Exponemos los necesarios
+  endpoint:
+    health:
+      show-details: always   # Para ver si Kafka y Postgres están OK
+  health:
+    kafka:
+      enabled: true          # Habilitar check de salud de Kafka
+    db:
+      enabled: true          # Habilitar check de salud de DB
+
 logging:
   level:
     com.kafkaeventdriven.ingest: DEBUG

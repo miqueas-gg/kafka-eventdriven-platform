@@ -25,6 +25,7 @@
         <module>domain-service</module>
         <module>event-ingest-service</module>
         <module>integration-tests</module>
+        <module>notification-service</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,5 @@
+com\kafkaeventdriven\notification\NotificationDispatcher.class
+com\kafkaeventdriven\notification\repositories\ProcessedEventRepository.class
+com\kafkaeventdriven\notification\entities\ProcessedEventEntity.class
+com\kafkaeventdriven\notification\NotificationApplication.class
+com\kafkaeventdriven\notification\NotificationConsumer.class

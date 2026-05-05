@@ -1,0 +1,14 @@
+com\kafkaeventdriven\ingest\domain\repositories\EventRepository.class
+com\kafkaeventdriven\ingest\application\dtos\EventResponseDTO.class
+com\kafkaeventdriven\ingest\application\dtos\EventStatsDTO.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\EventIngestConsumer.class
+com\kafkaeventdriven\ingest\application\services\EventIngestService.class
+com\kafkaeventdriven\ingest\application\services\EventQueryService.class
+com\kafkaeventdriven\ingest\IngestApplication.class
+com\kafkaeventdriven\ingest\infrastructure\repositories\specs\EventSpecifications.class
+com\kafkaeventdriven\ingest\application\dtos\ErrorResponseDTO.class
+com\kafkaeventdriven\ingest\application\validator\EventValidator.class
+com\kafkaeventdriven\ingest\infrastructure\rest\EventController.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\KafkaConfig.class
+com\kafkaeventdriven\ingest\domain\entities\EventEntity.class
+com\kafkaeventdriven\ingest\domain\exceptions\InvalidEventException.class

@@ -24,10 +24,12 @@
         <module>event-library</module>
         <module>domain-service</module>
         <module>event-ingest-service</module>
+        <module>integration-tests</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+        
             </dependencies>
     </dependencyManagement>
 </project>

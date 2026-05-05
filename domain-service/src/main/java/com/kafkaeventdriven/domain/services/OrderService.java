@@ -72,11 +72,16 @@ public class OrderService {
         // 5. Guardar en DB (Cascada guardará los items automáticamente)
         Order savedOrder = orderRepository.save(order);
         meterRegistry.counter("domain.orders.created").increment();
-        OrderCreatedEvent event = new OrderCreatedEvent(
-                savedOrder.getId().toString(),
-                savedOrder.getCustomer().getId(),
-                savedOrder.getTotalAmount()
-                );
+        OrderCreatedEvent event = OrderCreatedEvent.builder()
+                .orderId(savedOrder.getId())
+                .aggregateId(savedOrder.getId().toString())
+                .customerId(savedOrder.getCustomer().getId())
+                .totalAmount(savedOrder.getTotalAmount())
+                .eventId(UUID.randomUUID())
+                .occurredAt(java.time.Instant.now())
+                // .eventType("ORDER_CREATED") // Ya no hace falta si tienes @Builder.Default
+                .source("domain-service")
+                .build();
                 // 6. Publicar en Kafka dentro de la transacción
         try {
             eventPublisher.publish(event, null);

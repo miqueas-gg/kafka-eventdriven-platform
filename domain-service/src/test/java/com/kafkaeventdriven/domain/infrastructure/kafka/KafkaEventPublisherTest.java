@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -29,7 +30,14 @@ class KafkaEventPublisherTest {
     @Test
     void shouldCallKafkaTemplateWhenPublishing() {
         // GIVEN
-        OrderCreatedEvent event = new OrderCreatedEvent(UUID.randomUUID().toString(), UUID.randomUUID(), BigDecimal.TEN);
+        OrderCreatedEvent event = OrderCreatedEvent.builder()
+                .orderId(UUID.randomUUID())
+                .aggregateId(UUID.randomUUID().toString())
+                .customerId(UUID.randomUUID())
+                .totalAmount(BigDecimal.TEN)
+                .eventId(UUID.randomUUID())
+                .occurredAt(java.time.Instant.now())
+                .build();
         
         // Simulamos la respuesta asíncrona de Kafka
         when(kafkaTemplate.send(anyString(), anyString(), any())).thenReturn(new CompletableFuture<>());

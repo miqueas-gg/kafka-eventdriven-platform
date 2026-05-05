@@ -8,6 +8,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.context.ActiveProfiles;
 
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,28 +28,37 @@ class EventIngestIntegrationTest {
     @Autowired
     private EventRepository eventRepository;
 
+    @DynamicPropertySource
+    static void overrideProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.kafka.bootstrap-servers", 
+            () -> System.getProperty("spring.kafka.embedded.brokers"));
+    }
+
     @Test
-    void whenEventIsPublished_thenItIsPersistedInEventStore() {
-        // 1. Preparamos un evento de prueba (JSON bruto)
+    void whenEventIsPublished_thenItIsPersistedInEventStore() throws Exception {
+        // GIVEN
+        String eventIdStr = "550e8400-e29b-41d4-a716-446655440000";
         String eventJson = """
             {
-                "eventId": "550e8400-e29b-41d4-a716-446655440000",
+                "eventId": "%s",
                 "eventType": "ORDER_CREATED",
-                "source": "domain-service",
+                "source": "test-source",
+                "version": "1.0",
                 "payload": {"orderId": "123"},
                 "occurredAt": "2026-04-28T14:30:00"
             }
-            """;
+            """.formatted(eventIdStr);
 
-        // 2. Lo enviamos al topic que escucha nuestro Ingest
-        kafkaTemplate.send("domain.events", eventJson);
+        // WHEN
+        kafkaTemplate.send("domain.events", eventJson).get(10, TimeUnit.SECONDS);
 
-        // 3. Verificamos que el servicio lo ha guardado en la base de datos
-        await().atMost(10, TimeUnit.SECONDS).untilAsserted(() -> {
-            boolean exists = eventRepository.existsByEventId(
-                java.util.UUID.fromString("550e8400-e29b-41d4-a716-446655440000")
-            );
-            assertThat(exists).isTrue();
-        });
+        // THEN
+        await()
+            .atMost(15, TimeUnit.SECONDS)
+            .pollInterval(500, TimeUnit.MILLISECONDS)
+            .untilAsserted(() -> {
+                boolean exists = eventRepository.existsByEventId(UUID.fromString(eventIdStr));
+                assertThat(exists).as("El evento debería haberse persistido en la base de datos").isTrue();
+            });
     }
 }

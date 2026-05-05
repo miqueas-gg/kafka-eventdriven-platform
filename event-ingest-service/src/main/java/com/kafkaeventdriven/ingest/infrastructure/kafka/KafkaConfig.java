@@ -6,7 +6,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 
-@Configuration
+@Configuration("ingestKafkaConfig")
 public class KafkaConfig {
 
     @Bean

@@ -1,0 +1,5 @@
+com\kafkaeventdriven\ingest\application\validator\EventValidatorTest.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\IngestMetricsIntegrationTest.class
+com\kafkaeventdriven\ingest\infrastructure\rest\EventQueryIntegrationTest.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\EventIngestIntegrationTest.class
+com\kafkaeventdriven\ingest\infrastructure\kafka\EventIngestDltIntegrationTest.class

@@ -1,6 +1,7 @@
 package com.kafkaeventdriven.ingest.application.dtos;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+
 import java.util.UUID;
 
 public record EventResponseDTO(
@@ -9,6 +10,6 @@ public record EventResponseDTO(
     String eventType,
     String source,
     Object payload,         // El JSONB completo
-    LocalDateTime occurredAt,
-    LocalDateTime ingestedAt
+    Instant occurredAt,
+    Instant ingestedAt
 ) {}

@@ -1,7 +1,9 @@
 package com.kafkaeventdriven.notification;
 
 import com.kafkaeventdriven.events.*;
+import com.kafkaeventdriven.notification.entities.NotificationEntity;
 import com.kafkaeventdriven.notification.entities.ProcessedEventEntity;
+import com.kafkaeventdriven.notification.repositories.NotificationRepository; // El nuevo repo
 import com.kafkaeventdriven.notification.repositories.ProcessedEventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,40 +17,44 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
+@RequiredArgsConstructor // Esto inyecta automáticamente los "final"
 @KafkaListener(topics = "domain.events", groupId = "notification-group")
 public class NotificationConsumer {
 
     private final NotificationDispatcher dispatcher;
     private final ProcessedEventRepository processedEventRepository;
+    private final NotificationRepository notificationRepository; // Inyectado
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @KafkaHandler
     public void handleOrderCreated(OrderCreatedEvent event) {
-        // Convertimos UUID a String para el repositorio
         if (isDuplicate(event.getEventId().toString())) return;
         
-        dispatcher.dispatchOrderCreated(event);
+        try {
+            dispatcher.dispatchOrderCreated(event);
+            saveAudit(event.getEventId(), "ORDER_CREATED", event.getCustomerEmail(), "SENT");
+        } catch (Exception e) {
+            saveAudit(event.getEventId(), "ORDER_CREATED", event.getCustomerEmail(), "FAILED");
+            throw e; // Para que actúe el RetryableTopic
+        }
         
         saveAndSendEnriched(event.getEventId(), "ORDER_CREATED");
     }
 
-    @KafkaHandler
-    public void handleStatusChanged(OrderStatusChangedEvent event) {
-        if (isDuplicate(event.getEventId().toString())) return;
-        
-        dispatcher.dispatchOrderStatusChanged(event);
-        
-        saveAndSendEnriched(event.getEventId(), "ORDER_STATUS_CHANGED");
-    }
+    // Repite la misma lógica de try-catch para los otros @KafkaHandler...
 
-    @KafkaHandler
-    public void handleProductUpdated(ProductUpdatedEvent event) {
-        if (isDuplicate(event.getEventId().toString())) return;
+    private void saveAudit(UUID originalId, String type, String recipient, String status) {
+        NotificationEntity audit = NotificationEntity.builder()
+                .originalEventId(originalId)
+                .eventType(type)
+                .notificationType("LOG")
+                .recipient(recipient)
+                .status(status)
+                .attemptCount(1) // En issues futuras lo haremos dinámico
+                .dispatchedAt(Instant.now())
+                .build();
         
-        dispatcher.dispatchProductUpdated(event);
-        
-        saveAndSendEnriched(event.getEventId(), "PRODUCT_UPDATED");
+        notificationRepository.save(audit);
     }
 
     private boolean isDuplicate(String eventId) {
@@ -56,14 +62,10 @@ public class NotificationConsumer {
     }
 
     private void saveAndSendEnriched(UUID eventId, String type) {
-        processedEventRepository.save(new ProcessedEventEntity(eventId.toString(), LocalDateTime.now()));
-        
-        // Ajustado a los campos de NotificationDispatchedEvent
+        processedEventRepository.save(new ProcessedEventEntity(eventId.toString(), Instant.now()));
         NotificationDispatchedEvent enriched = new NotificationDispatchedEvent();
         enriched.setEventId(eventId); 
-        // Si no existe setDispatchTime, prueba con setOccurredAt (que suele estar en BaseEvent)
-        enriched.setOccurredAt(java.time.Instant.now());
-        
+        enriched.setOccurredAt(Instant.now());
         kafkaTemplate.send("domain.events.enriched", eventId.toString(), enriched);
     }
 }

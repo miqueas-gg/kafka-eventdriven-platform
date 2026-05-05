@@ -5,20 +5,27 @@ spring:
   application:
     name: notification-service
   datasource:
-    url: jdbc:h2:mem:notificationdb;DB_CLOSE_DELAY=-1
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/notificationdb
+    username: admin 
+    password: admin 
+    driver-class-name: org.postgresql.Driver
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+    show-sql: true
+    flyway:
+    enabled: true
+    baseline-on-migrate: true 
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: notification-group
+      group-id: notification-group-v5
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     properties:
-      spring.json.trusted.packages: "com.kafkaeventdriven.*"
+      spring.json.trusted.packages: "*"
+      spring.json.value.default.type: "com.kafkaeventdriven.events.OrderCreatedEvent"
       spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+      spring.json.use.type.headers: true

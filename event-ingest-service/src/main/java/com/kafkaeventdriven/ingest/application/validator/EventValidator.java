@@ -37,29 +37,41 @@ public class EventValidator {
         validateDate(root.get("occurredAt"));
     }
 
-    private void validateDate(JsonNode dateNode) {
+   private void validateDate(JsonNode dateNode) {
         if (dateNode == null || dateNode.isNull()) {
             throw new InvalidEventException("El campo 'occurredAt' es obligatorio");
         }
 
         try {
-            LocalDateTime occurredAt;
+            java.time.Instant occurredAt;
+            
             if (dateNode.isNumber()) {
-                // Si viene como timestamp (segundos)
-                occurredAt = java.time.Instant.ofEpochSecond(dateNode.asLong())
-                        .atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
+                // Soporta tanto segundos como milisegundos (detección automática simple)
+                long value = dateNode.asLong();
+                if (value > 9999999999L) { // Probablemente milisegundos
+                    occurredAt = java.time.Instant.ofEpochMilli(value);
+                } else { // Probablemente segundos
+                    occurredAt = java.time.Instant.ofEpochSecond(value);
+                }
             } else {
-                // Si viene como String ISO
-                occurredAt = LocalDateTime.parse(dateNode.asText());
+                // Intenta parsear como Instant (formato ISO-8601 con Z)
+                // Si falla, intenta parsear como LocalDateTime y convertirlo
+                try {
+                    occurredAt = java.time.Instant.parse(dateNode.asText());
+                } catch (DateTimeParseException e) {
+                    occurredAt = LocalDateTime.parse(dateNode.asText())
+                            .atZone(java.time.ZoneId.systemDefault()).toInstant();
+                }
             }
 
-            // Validación de futuro con margen de 5 minutos
-            LocalDateTime limit = LocalDateTime.now().plusMinutes(5);
+            // Validación de futuro con margen de 5 minutos usando Instant
+            java.time.Instant limit = java.time.Instant.now().plus(5, java.time.temporal.ChronoUnit.MINUTES);
             if (occurredAt.isAfter(limit)) {
-                throw new InvalidEventException("La fecha 'occurredAt' no puede estar en el futuro (fuera del margen de 5 min)");
+                throw new InvalidEventException("La fecha 'occurredAt' no puede estar en el futuro");
             }
 
-        } catch (DateTimeParseException | IllegalArgumentException e) {
+        } catch (Exception e) {
+            log.error("Error al validar fecha: {}", e.getMessage());
             throw new InvalidEventException("Formato de fecha 'occurredAt' inválido");
         }
     }

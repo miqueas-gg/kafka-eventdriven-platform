@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(name = "processed_events")
@@ -16,5 +16,5 @@ import java.time.LocalDateTime;
 public class ProcessedEventEntity {
     @Id
     private String eventId;
-    private LocalDateTime processedAt;
+    private Instant processedAt;
 }

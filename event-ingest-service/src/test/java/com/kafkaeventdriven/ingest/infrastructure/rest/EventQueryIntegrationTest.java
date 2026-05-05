@@ -12,7 +12,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -57,10 +59,10 @@ class EventQueryIntegrationTest {
     void setUp() {
         eventRepository.deleteAll();
         
-        // Insertamos datos de prueba
-        saveEvent("ORDER_CREATED", "sales-service", LocalDateTime.now().minusDays(2));
-        saveEvent("ORDER_CREATED", "sales-service", LocalDateTime.now().minusDays(1));
-        saveEvent("USER_LOGGED_IN", "auth-service", LocalDateTime.now());
+        // Insertamos datos de prueba usando Instant
+        saveEvent("ORDER_CREATED", "sales-service", Instant.now().minus(2, ChronoUnit.DAYS));
+        saveEvent("ORDER_CREATED", "sales-service", Instant.now().minus(1, ChronoUnit.DAYS));
+        saveEvent("USER_LOGGED_IN", "auth-service", Instant.now());
     }
 
     @Test
@@ -94,7 +96,7 @@ class EventQueryIntegrationTest {
                 .andExpect(jsonPath("$.id").value(saved.getId().toString()));
     }
 
-    private void saveEvent(String type, String source, LocalDateTime occurredAt) {
+    private void saveEvent(String type, String source, Instant occurredAt) {
         EventEntity entity = new EventEntity();
         entity.setEventId(UUID.randomUUID());
         entity.setEventType(type);

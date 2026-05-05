@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -32,8 +32,8 @@ public class EventEntity {
     private JsonNode payload; // Aquí se guarda  el JSON
 
     @Column(name = "occurred_at", nullable = false)
-    private LocalDateTime occurredAt;
+    private Instant occurredAt;
 
     @Column(name = "ingested_at", nullable = false)
-    private LocalDateTime ingestedAt = LocalDateTime.now();
+    private Instant ingestedAt = Instant.now();
 }

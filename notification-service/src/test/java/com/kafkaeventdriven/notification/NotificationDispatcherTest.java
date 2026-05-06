@@ -3,14 +3,35 @@ package com.kafkaeventdriven.notification;
 import com.kafkaeventdriven.events.OrderCreatedEvent;
 import com.kafkaeventdriven.events.OrderStatusChangedEvent;
 import com.kafkaeventdriven.events.ProductUpdatedEvent;
+import com.kafkaeventdriven.notification.repositories.NotificationRepository;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import java.util.UUID;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 class NotificationDispatcherTest {
 
-    private final NotificationDispatcher dispatcher = new NotificationDispatcher();
+   private NotificationRepository repository;
+    private NotificationDispatcher dispatcher;
+
+    @BeforeEach
+    void setUp() {
+        // 1. Creamos un mock del repositorio
+        repository = Mockito.mock(NotificationRepository.class);
+        
+        // 2. Se lo pasamos al constructor que generó @RequiredArgsConstructor
+        dispatcher = new NotificationDispatcher(repository);
+
+        // 3. Configuramos un comportamiento por defecto para que no falle al buscar
+        when(repository.findByOriginalEventId(any())).thenReturn(Optional.empty());
+    }
 
     @Test
     void shouldHandleOrderCreatedLog() {

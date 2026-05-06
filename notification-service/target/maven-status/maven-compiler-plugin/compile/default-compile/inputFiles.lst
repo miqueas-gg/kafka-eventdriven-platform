@@ -1,5 +1,6 @@
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\main\java\com\kafkaeventdriven\notification\repositories\ProcessedEventRepository.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\main\java\com\kafkaeventdriven\notification\entities\NotificationEntity.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\main\java\com\kafkaeventdriven\notification\infrastructure\configuration\KafkaConsumerConfig.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\main\java\com\kafkaeventdriven\notification\entities\ProcessedEventEntity.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\main\java\com\kafkaeventdriven\notification\NotificationApplication.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\main\java\com\kafkaeventdriven\notification\NotificationDispatcher.java

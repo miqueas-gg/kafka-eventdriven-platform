@@ -12,13 +12,12 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor // Esto inyecta automáticamente los "final"
-@KafkaListener(topics = "domain.events", groupId = "notification-group")
+@KafkaListener(topics = "domain.events")
 public class NotificationConsumer {
 
     private final NotificationDispatcher dispatcher;

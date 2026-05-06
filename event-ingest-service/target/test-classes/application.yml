@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: event-ingest-service-test
+
+  # Desactivamos Flyway para que no intente ejecutar scripts de Postgres en H2
+  flyway:
+    enabled: false
+
+  datasource:
+    
+    url: jdbc:h2:mem:eventstore_test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS events
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+
+  jpa:
+    # Hibernate creará las tablas automáticamente basándose en tus @Entity
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        # Forzamos a que no use esquemas si H2 da problemas con el esquema 'events'
+        default_schema: 
+
+  kafka:
+    # Configuración para EmbeddedKafka
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    consumer:
+      group-id: test-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# Desactivamos el servidor de gestión en tests para evitar conflictos de puertos
+management:
+  server:
+    port: -1

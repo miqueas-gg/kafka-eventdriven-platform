@@ -1,0 +1,2 @@
+com\kafkaeventdriven\notification\NotificationPersistenceIT.class
+com\kafkaeventdriven\notification\NotificationDispatcherTest.class

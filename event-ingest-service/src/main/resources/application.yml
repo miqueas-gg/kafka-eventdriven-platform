@@ -1,0 +1,55 @@
+server:
+  port: 8083 
+
+spring:
+  application:
+    name: event-ingest-service
+
+  # ... (Tus configuraciones de datasource, jpa y kafka se mantienen igual) ...
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate 
+    properties:
+      hibernate:
+        default_schema: events 
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: event-ingest-group
+      auto-offset-reset: earliest 
+      enable-auto-commit: false    
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual_immediate 
+
+# --- AQUÍ EMPIEZA LO NUEVO PARA LA ISSUE 19 ---
+management:
+  server:
+    port: 8084              # Puerto específico para métricas (Requisito)
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus # Exponemos los necesarios
+  endpoint:
+    health:
+      show-details: always   # Para ver si Kafka y Postgres están OK
+  health:
+    kafka:
+      enabled: true          # Habilitar check de salud de Kafka
+    db:
+      enabled: true          # Habilitar check de salud de DB
+
+logging:
+  level:
+    com.kafkaeventdriven.ingest: DEBUG
+    org.springframework.kafka: INFO

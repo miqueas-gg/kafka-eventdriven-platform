@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "notifications",
+      "type": "com.kafkaeventdriven.notification.config.NotificationProperties",
+      "sourceType": "com.kafkaeventdriven.notification.config.NotificationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "notifications.channels",
+      "type": "java.util.Map<java.lang.String,java.util.List<java.lang.String>>",
+      "description": "Este mapa recibirá los datos del YAML. Clave: ORDER_CREATED, etc. Valor: [LOG, EMAIL], etc.",
+      "sourceType": "com.kafkaeventdriven.notification.config.NotificationProperties"
+    },
+    {
+      "name": "notifications.webhook-url",
+      "type": "java.lang.String",
+      "sourceType": "com.kafkaeventdriven.notification.config.NotificationProperties"
+    }
+  ],
+  "hints": []
+}

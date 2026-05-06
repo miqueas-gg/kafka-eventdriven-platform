@@ -1,9 +1,10 @@
 com\kafkaeventdriven\notification\NotificationDispatcher.class
 com\kafkaeventdriven\notification\entities\ProcessedEventEntity.class
 com\kafkaeventdriven\notification\repositories\NotificationRepository.class
+com\kafkaeventdriven\notification\entities\NotificationEntity.class
+com\kafkaeventdriven\notification\NotificationApplication.class
+META-INF\spring-configuration-metadata.json
 com\kafkaeventdriven\notification\NotificationController.class
 com\kafkaeventdriven\notification\NotificationConsumer.class
 com\kafkaeventdriven\notification\entities\NotificationEntity$NotificationEntityBuilder.class
-com\kafkaeventdriven\notification\entities\NotificationEntity.class
 com\kafkaeventdriven\notification\repositories\ProcessedEventRepository.class
-com\kafkaeventdriven\notification\NotificationApplication.class

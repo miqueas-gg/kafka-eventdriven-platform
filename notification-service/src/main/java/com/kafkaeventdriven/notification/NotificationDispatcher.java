@@ -1,16 +1,20 @@
 package com.kafkaeventdriven.notification;
 
-import com.kafkaeventdriven.events.*;
+import com.kafkaeventdriven.events.BaseEvent;
+import com.kafkaeventdriven.events.OrderCreatedEvent;
+import com.kafkaeventdriven.events.OrderStatusChangedEvent;
+import com.kafkaeventdriven.events.ProductUpdatedEvent;
+import com.kafkaeventdriven.notification.channels.NotificationChannel;
+import com.kafkaeventdriven.notification.config.NotificationProperties;
 import com.kafkaeventdriven.notification.entities.NotificationEntity;
 import com.kafkaeventdriven.notification.repositories.NotificationRepository;
-
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-
-import org.springframework.stereotype.Component;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -18,53 +22,60 @@ import org.springframework.stereotype.Component;
 public class NotificationDispatcher {
 
     private final NotificationRepository repository;
+    private final NotificationProperties properties;
+    private final List<NotificationChannel> availableChannels;
 
-// En NotificationDispatcher.java
-
-@Transactional
-public void dispatchOrderCreated(OrderCreatedEvent event) {
-    // 1. Aseguramos que la entidad exista (esto no debe fallar)
-    NotificationEntity notification = repository.findByOriginalEventId(event.getEventId())
-            .orElseGet(() -> {
-                NotificationEntity newEntity = new NotificationEntity();
-                newEntity.setOriginalEventId(event.getEventId());
-                newEntity.setEventType("ORDER_CREATED");
-                newEntity.setAttemptCount(0);
-                newEntity.setStatus("PENDING");
-                return repository.saveAndFlush(newEntity); 
-            });
-
-    try {
-        // 2. Incrementamos el contador manualmente
-        notification.setAttemptCount(notification.getAttemptCount() + 1);
-        log.info(">>> EJECUTANDO INTENTO {} PARA EVENTO {}", 
-                 notification.getAttemptCount(), event.getEventId());
-        
-        // 3. Lógica que será interceptada por el Spy y lanzará error
-        // ...
-        
-        notification.setStatus("SENT");
-        repository.saveAndFlush(notification);
-
-    } catch (Exception e) {
-        // 4. Si falla, marcamos FAILED y guardamos
-        notification.setStatus("FAILED");
-        repository.saveAndFlush(notification);
-        throw e; 
+    @Transactional
+    public void dispatchOrderCreated(OrderCreatedEvent event) {
+        handleDispatch(event, "ORDER_CREATED", event.getCustomerEmail());
     }
-}
+
+    @Transactional
     public void dispatchOrderStatusChanged(OrderStatusChangedEvent event) {
-        log.info("Notificando al cliente que su pedido {} pasó a estado {}", 
-            event.getOrderId(), event.getNewStatus());
+        // Para este evento, podrías necesitar el email del cliente, 
+        // aquí usamos un placeholder o lo extraemos si tu evento lo tiene
+        handleDispatch(event, "ORDER_STATUS_CHANGED", "customer@example.com");
     }
 
+    @Transactional
     public void dispatchProductUpdated(ProductUpdatedEvent event) {
-        // Según tu clase: el criterio es que el campo cambiado sea el precio
-        if ("price".equalsIgnoreCase(event.getChangedField())) {
-            log.info("Alerta: el precio del producto {} cambió de {} a {}", 
-                event.getProductName(), 
-                event.getPreviousValue(), 
-                event.getNewValue());
+        // Los cambios de producto suelen ser para admins o logs internos
+        handleDispatch(event, "PRODUCT_UPDATED", "admin@system.com");
+    }
+
+    private void handleDispatch(BaseEvent event, String eventType, String recipient) {
+        NotificationEntity notification = repository.findByOriginalEventId(event.getEventId())
+                .orElseGet(() -> {
+                    NotificationEntity newEntity = new NotificationEntity();
+                    newEntity.setOriginalEventId(event.getEventId());
+                    newEntity.setEventType(eventType);
+                    newEntity.setAttemptCount(0);
+                    newEntity.setStatus("PENDING");
+                    return repository.saveAndFlush(newEntity);
+                });
+
+        try {
+            notification.setAttemptCount(notification.getAttemptCount() + 1);
+            
+            // Lógica Strategy
+            routeNotification(eventType, event, recipient);
+
+            notification.setStatus("SENT");
+            notification.setDispatchedAt(Instant.now());
+            repository.saveAndFlush(notification);
+
+        } catch (Exception e) {
+            notification.setStatus("FAILED");
+            repository.saveAndFlush(notification);
+            throw e;
         }
+    }
+
+    private void routeNotification(String eventType, BaseEvent event, String recipient) {
+        List<String> activeChannelNames = properties.getChannels().getOrDefault(eventType, List.of("LOG"));
+        
+        availableChannels.stream()
+                .filter(channel -> activeChannelNames.contains(channel.getChannelType()))
+                .forEach(channel -> channel.dispatch(event, recipient));
     }
 }

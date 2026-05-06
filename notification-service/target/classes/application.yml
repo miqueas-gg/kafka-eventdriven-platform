@@ -21,7 +21,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: notification-group-v5
+      group-id: notification-group-v6
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
@@ -38,3 +38,20 @@ notifications:
     ORDER_CREATED: [LOG, EMAIL]
     ORDER_STATUS_CHANGED: [LOG, WEBHOOK]
     PRODUCT_UPDATED: [LOG]
+management:
+  server:
+    port: 8086
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+      validate-group-membership: false
+      group:
+        readiness:
+          include: db, kafka
+  metrics:
+    tags:
+      application: ${spring.application.name}

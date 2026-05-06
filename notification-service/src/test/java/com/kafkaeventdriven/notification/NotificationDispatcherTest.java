@@ -1,15 +1,17 @@
 package com.kafkaeventdriven.notification;
+
 import com.kafkaeventdriven.events.OrderCreatedEvent;
 import com.kafkaeventdriven.events.OrderStatusChangedEvent;
 import com.kafkaeventdriven.events.ProductUpdatedEvent;
 import com.kafkaeventdriven.notification.channels.NotificationChannel;
 import com.kafkaeventdriven.notification.config.NotificationProperties;
 import com.kafkaeventdriven.notification.repositories.NotificationRepository;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,6 +26,7 @@ class NotificationDispatcherTest {
     private NotificationRepository repository;
     private NotificationProperties properties;
     private List<NotificationChannel> channels;
+    private MeterRegistry meterRegistry; // Nuevo campo necesario
     private NotificationDispatcher dispatcher;
 
     @BeforeEach
@@ -33,25 +36,27 @@ class NotificationDispatcherTest {
         repository = Mockito.mock(NotificationRepository.class);
         properties = Mockito.mock(NotificationProperties.class);
         
-        // 2. Mock de un canal (por ejemplo el de LOG) para que la lista no esté vacía
+        // 2. Usamos SimpleMeterRegistry (una implementación real de memoria para tests)
+        // Esto es mejor que un mock porque evita configurar comportamientos del meterRegistry
+        meterRegistry = new SimpleMeterRegistry();
+        
+        // 3. Mock de un canal (LOG)
         NotificationChannel logChannel = Mockito.mock(NotificationChannel.class);
         when(logChannel.getChannelType()).thenReturn("LOG");
         channels = List.of(logChannel);
 
-        // 3. Configuramos las propiedades para que devuelvan un mapa válido
-        // Esto evita el NullPointerException cuando el dispatcher llame a properties.getChannels()
+        // 4. Configuración de propiedades
         when(properties.getChannels()).thenReturn(Map.of(
             "ORDER_CREATED", List.of("LOG"),
             "ORDER_STATUS_CHANGED", List.of("LOG"),
             "PRODUCT_UPDATED", List.of("LOG")
         ));
 
-        // 4. Pasamos los TRES argumentos al nuevo constructor
-        dispatcher = new NotificationDispatcher(repository, properties, channels);
+        // 5. ¡AQUÍ ESTÁ LA CORRECCIÓN! Pasamos los CUATRO argumentos
+        dispatcher = new NotificationDispatcher(repository, properties, channels, meterRegistry);
 
-        // 5. Comportamiento por defecto del repo
+        // 6. Comportamiento por defecto del repo
         when(repository.findByOriginalEventId(any())).thenReturn(Optional.empty());
-        // Importante: mockear saveAndFlush para evitar NPE
         when(repository.saveAndFlush(any())).thenAnswer(i -> i.getArguments()[0]);
     }
 
@@ -65,11 +70,12 @@ class NotificationDispatcherTest {
 
         assertDoesNotThrow(() -> dispatcher.dispatchOrderCreated(event));
     }
+
     @Test
     void shouldHandleOrderStatusChangedLog() {
         OrderStatusChangedEvent event = OrderStatusChangedEvent.builder()
                 .eventId(UUID.randomUUID())
-                .orderId(UUID.randomUUID()) // Cambiado de String a UUID
+                .orderId(UUID.randomUUID())
                 .newStatus("SHIPPED")
                 .build();
 
@@ -80,11 +86,8 @@ class NotificationDispatcherTest {
     void shouldHandleProductPriceUpdatedLog() {
         ProductUpdatedEvent event = ProductUpdatedEvent.builder()
                 .eventId(UUID.randomUUID())
-                .productId(UUID.randomUUID()) // Asegúrate de que productId también sea UUID
+                .productId(UUID.randomUUID())
                 .productName("Teclado Mecánico")
-                .changedField("price")
-                .previousValue("50.0")
-                .newValue("45.0")
                 .build();
 
         assertDoesNotThrow(() -> dispatcher.dispatchProductUpdated(event));

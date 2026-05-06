@@ -8,6 +8,8 @@ import com.kafkaeventdriven.notification.channels.NotificationChannel;
 import com.kafkaeventdriven.notification.config.NotificationProperties;
 import com.kafkaeventdriven.notification.entities.NotificationEntity;
 import com.kafkaeventdriven.notification.repositories.NotificationRepository;
+import io.micrometer.core.instrument.MeterRegistry; // Importante
+import io.micrometer.core.instrument.Timer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -24,6 +27,7 @@ public class NotificationDispatcher {
     private final NotificationRepository repository;
     private final NotificationProperties properties;
     private final List<NotificationChannel> availableChannels;
+    private final MeterRegistry meterRegistry;
 
     @Transactional
     public void dispatchOrderCreated(OrderCreatedEvent event) {
@@ -57,6 +61,9 @@ public class NotificationDispatcher {
         try {
             notification.setAttemptCount(notification.getAttemptCount() + 1);
             
+            if (notification.getAttemptCount() > 1) {
+                meterRegistry.counter("notification.retry.count").increment();
+            }
             // Lógica Strategy
             routeNotification(eventType, event, recipient);
 
@@ -76,6 +83,26 @@ public class NotificationDispatcher {
         
         availableChannels.stream()
                 .filter(channel -> activeChannelNames.contains(channel.getChannelType()))
-                .forEach(channel -> channel.dispatch(event, recipient));
+                .forEach(channel -> {
+                    // Métrica: notification.dispatch.time (Timer)
+                    Timer.Sample sample = Timer.start(meterRegistry);
+                    String status = "SENT";
+                    
+                    try {
+                        channel.dispatch(event, recipient);
+                    } catch (Exception e) {
+                        status = "FAILED";
+                        throw e;
+                    } finally {
+                        sample.stop(meterRegistry.timer("notification.dispatch.time", 
+                            "channel", channel.getChannelType()));
+                        
+                        // Métrica: notification.dispatched (Counter con tags)
+                        meterRegistry.counter("notification.dispatched",
+                                "event_type", eventType,
+                                "channel", channel.getChannelType(),
+                                "status", status).increment();
+                    }
+                });
     }
 }

@@ -3,3 +3,4 @@ C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\test\java\com\kafkaeventdriven\notification\NotificationPersistenceIT.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\test\java\com\kafkaeventdriven\notification\NotificationRetryIntegrationTest.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\test\java\com\kafkaeventdriven\notification\NotificationDispatcherTest.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\notification-service\src\test\java\com\kafkaeventdriven\notification\NotificationMetricsTest.java

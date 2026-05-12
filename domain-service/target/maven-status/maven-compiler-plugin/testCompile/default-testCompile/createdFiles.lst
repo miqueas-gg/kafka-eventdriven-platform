@@ -6,6 +6,7 @@ com\kafkaeventdriven\domain\infrastructure\kafka\KafkaIntegrationIT.class
 com\kafkaeventdriven\domain\controllers\OrderControllerIT.class
 com\kafkaeventdriven\domain\infrastructure\config\WebConfig$1.class
 com\kafkaeventdriven\domain\infrastructure\kafka\ProductIntegrationIT.class
+com\kafkaeventdriven\domain\services\OrderServiceOutboxTest.class
 com\kafkaeventdriven\domain\infrastructure\config\WebConfig.class
 com\kafkaeventdriven\domain\infrastructure\kafka\OrderStatusIntegrationIT.class
 com\kafkaeventdriven\domain\infrastructure\kafka\IdempotencyServiceIT.class

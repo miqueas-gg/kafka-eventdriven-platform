@@ -1,5 +1,6 @@
 package com.kafkaeventdriven.domain.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kafkaeventdriven.domain.dtos.*;
 import com.kafkaeventdriven.domain.entities.*;
 import com.kafkaeventdriven.domain.exceptions.InvalidStateTransitionException;
@@ -32,23 +33,24 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final KafkaEventPublisher eventPublisher;
     private final MeterRegistry meterRegistry;
+    private final OutboxRepository outboxRepository;
+    private final ObjectMapper objectMapper; // Para serializar el payload
 
     @Transactional(rollbackFor = Exception.class)
     public OrderResponse createOrder(OrderRequest request) {
-        // 1. Validar que el cliente existe
+       
         Customer customer = customerRepository.findById(request.customerId())
                 .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con ID: " + request.customerId()));
 
-        // 2. Crear la cabecera del pedido (Status PENDING por defecto)
         Order order = Order.builder()
                 .customer(customer)
                 .status(OrderStatus.PENDING)
                 .notes(request.notes())
                 .build();
 
-        // 3. Mapear y validar Items, y calcular el Total
+        
         List<OrderItem> items = request.items().stream().map(itemRequest -> {
-            // Validar que el producto existe (opcional, pero recomendado)
+           
             Product product = productRepository.findById(itemRequest.productId())
                     .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado: " + itemRequest.productId()));
 
@@ -62,14 +64,14 @@ public class OrderService {
 
         order.setItems(items);
 
-        // 4. Calcular el total acumulado
+        
         BigDecimal total = items.stream()
                 .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         
         order.setTotalAmount(total);
 
-        // 5. Guardar en DB (Cascada guardará los items automáticamente)
+        
         Order savedOrder = orderRepository.save(order);
         meterRegistry.counter("domain.orders.created").increment();
         OrderCreatedEvent event = OrderCreatedEvent.builder()
@@ -80,19 +82,29 @@ public class OrderService {
                 .totalAmount(savedOrder.getTotalAmount())
                 .eventId(UUID.randomUUID())
                 .occurredAt(java.time.Instant.now())
-                // .eventType("ORDER_CREATED") // Ya no hace falta si tienes @Builder.Default
                 .source("domain-service")
                 .build();
-                // 6. Publicar en Kafka dentro de la transacción
+                
         try {
-            eventPublisher.publish(event, null);
-            log.debug("Publicación exitosa en Kafka para el pedido: {}", savedOrder.getId());
-        } catch (Exception e) {
-            log.error("Fallo al publicar en Kafka para el pedido: {}", savedOrder.getId(), e);
-            // TODO: Limitación de consistencia. Aunque Kafka falle y lancemos excepción,
-            // existe el riesgo de "Dual Write". Ver OUTBOX-1.
+            String payload = objectMapper.writeValueAsString(event);
             
-            throw new RuntimeException("Kafka Failure - Rolling back DB", e); // Lanzamos la excepción para forzar el ROLLBACK de la BD
+            OutboxEvent outboxEntry = OutboxEvent.builder()
+                    .id(event.getEventId()) // Usamos el mismo ID del evento
+                    .aggregateType("ORDER")
+                    .aggregateId(savedOrder.getId())
+                    .eventType("ORDER_CREATED")
+                    .payload(payload)
+                    .createdAt(java.time.Instant.now())
+                    .published(false) // Marcamos como NO publicado
+                    .build();
+
+            outboxRepository.save(outboxEntry); // Se guarda en la MISMA transacción que el Order
+            log.info("Evento guardado en Outbox para el pedido: {}", savedOrder.getId());
+
+        } catch (Exception e) {
+            log.error("Fallo al guardar en Outbox", e);
+            // Si esto falla, el throw forzará el ROLLBACK de la orden en la DB
+            throw new RuntimeException("Fallo en persistencia de evento - Cancelando pedido", e);
         }
         return mapToResponse(savedOrder);
     }

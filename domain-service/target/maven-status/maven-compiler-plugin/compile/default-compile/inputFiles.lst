@@ -24,7 +24,9 @@ C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\Customer.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\ProductService.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\services\OrderService.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\OutboxRepository.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\repositories\OrderRepository.java
+C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\OutboxEvent.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\infrastructure\kafka\KafkaConfig.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\dtos\OrderItemRequest.java
 C:\Users\shhernandez.INDRA\Documents\kafkaEventiDrivenPlatform\kafka-eventdriven-platform\domain-service\src\main\java\com\kafkaeventdriven\domain\entities\OrderItem.java

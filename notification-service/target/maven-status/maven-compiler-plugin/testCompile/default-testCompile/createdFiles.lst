@@ -1,0 +1,6 @@
+com\kafkaeventdriven\notification\NotificationRetryIntegrationTest.class
+com\kafkaeventdriven\notification\channels\WebhookNotificationChannelTest.class
+com\kafkaeventdriven\notification\channels\SimpleChannelsTest.class
+com\kafkaeventdriven\notification\NotificationMetricsTest.class
+com\kafkaeventdriven\notification\NotificationDispatcherTest.class
+com\kafkaeventdriven\notification\NotificationPersistenceIT.class

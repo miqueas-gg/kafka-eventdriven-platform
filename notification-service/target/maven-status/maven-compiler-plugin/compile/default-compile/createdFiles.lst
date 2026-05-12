@@ -1,0 +1,17 @@
+com\kafkaeventdriven\notification\channels\NotificationChannel.class
+com\kafkaeventdriven\notification\config\RestTemplateConfig.class
+com\kafkaeventdriven\notification\NotificationDispatcher.class
+com\kafkaeventdriven\notification\entities\ProcessedEventEntity.class
+com\kafkaeventdriven\notification\repositories\NotificationRepository.class
+com\kafkaeventdriven\notification\channels\WebhookNotificationChannel.class
+com\kafkaeventdriven\notification\entities\NotificationEntity.class
+com\kafkaeventdriven\notification\config\NotificationProperties.class
+com\kafkaeventdriven\notification\NotificationApplication.class
+META-INF\spring-configuration-metadata.json
+com\kafkaeventdriven\notification\channels\LogNotificationChannel.class
+com\kafkaeventdriven\notification\NotificationController.class
+com\kafkaeventdriven\notification\channels\EmailNotificationChannel.class
+com\kafkaeventdriven\notification\NotificationConsumer.class
+com\kafkaeventdriven\notification\entities\NotificationEntity$NotificationEntityBuilder.class
+com\kafkaeventdriven\notification\infrastructure\configuration\KafkaConsumerConfig.class
+com\kafkaeventdriven\notification\repositories\ProcessedEventRepository.class

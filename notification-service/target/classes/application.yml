@@ -1,0 +1,61 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: notification-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notificationdb
+    username: admin 
+    password: admin 
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    # Flyway estaba mal indentado, debe colgar de 'spring', no de 'jpa'
+  flyway:
+    enabled: true
+    baseline-on-migrate: true 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-group-v7
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    # AÑADE ESTO PARA EL PRODUCER
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.trusted.packages: "*"
+      spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+      spring.json.use.type.headers: false
+      spring.json.value.default.type: com.kafkaeventdriven.events.OrderCreatedEvent
+
+# Esta sección es para nuestra Issue 24
+notifications:
+  webhook-url: "http://localhost:8080/callback"
+  channels:
+    ORDER_CREATED: [LOG, EMAIL]
+    ORDER_STATUS_CHANGED: [LOG, WEBHOOK]
+    PRODUCT_UPDATED: [LOG]
+management:
+  server:
+    port: 8086
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+      validate-group-membership: false
+      group:
+        readiness:
+          include: db, kafka
+  metrics:
+    tags:
+      application: ${spring.application.name}

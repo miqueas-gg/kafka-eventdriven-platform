@@ -76,6 +76,7 @@ public class OrderService {
                 .orderId(savedOrder.getId())
                 .aggregateId(savedOrder.getId().toString())
                 .customerId(savedOrder.getCustomer().getId())
+                .customerEmail(savedOrder.getCustomer().getEmail())
                 .totalAmount(savedOrder.getTotalAmount())
                 .eventId(UUID.randomUUID())
                 .occurredAt(java.time.Instant.now())

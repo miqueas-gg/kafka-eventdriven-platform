@@ -19,7 +19,7 @@ public class NotificationController {
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String eventType,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "80") int size) {
         
         var pageable = PageRequest.of(page, size);
         

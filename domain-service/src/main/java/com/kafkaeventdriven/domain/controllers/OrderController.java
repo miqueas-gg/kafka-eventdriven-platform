@@ -41,7 +41,7 @@ public class OrderController {
     // GET /api/orders -> Listado paginado
     @GetMapping
     public ResponseEntity<Page<OrderResponse>> listOrders(
-            @PageableDefault(size = 10) Pageable pageable) {
+            @PageableDefault(size = 50) Pageable pageable) {
         return ResponseEntity.ok(orderService.getAllOrders(pageable));
     }
 

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.kafkaeventdriven.domain.infrastructure.kafka.DltConsumerIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.27 s -- in com.kafkaeventdriven.domain.infrastructure.kafka.DltConsumerIntegrationTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.51 s -- in com.kafkaeventdriven.domain.infrastructure.kafka.DltConsumerIntegrationTest

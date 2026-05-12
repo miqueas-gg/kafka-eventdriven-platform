@@ -30,7 +30,7 @@ public class EventController {
             @RequestParam(required = false) String source,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
-            @PageableDefault(size = 20) Pageable pageable) {
+            @PageableDefault(size = 90) Pageable pageable) {
         
         var spec = EventSpecifications.withFilters(eventType, source, from, to);
         return ResponseEntity.ok(eventQueryService.findAll(spec, pageable));

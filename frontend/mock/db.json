@@ -1,0 +1,183 @@
+{
+  "products": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "name": "Laptop Pro 15",
+      "description": "Portátil de alto rendimiento con pantalla 15 pulgadas y 32 GB RAM",
+      "price": 1299.99,
+      "stock": 45,
+      "category": "Electrónica",
+      "status": "ACTIVE",
+      "createdAt": "2026-04-01T10:00:00Z",
+      "updatedAt": "2026-04-01T10:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440002",
+      "name": "Ratón Inalámbrico Pro",
+      "description": "Ratón ergonómico con conexión Bluetooth y batería de 90 días",
+      "price": 39.99,
+      "stock": 120,
+      "category": "Periféricos",
+      "status": "ACTIVE",
+      "createdAt": "2026-04-01T10:00:00Z",
+      "updatedAt": "2026-04-01T10:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "name": "Monitor 4K 27\"",
+      "description": "Monitor Ultra HD con panel IPS y 144 Hz",
+      "price": 549.00,
+      "stock": 0,
+      "category": "Electrónica",
+      "status": "OUT_OF_STOCK",
+      "createdAt": "2026-04-02T10:00:00Z",
+      "updatedAt": "2026-04-10T15:30:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440004",
+      "name": "Teclado Mecánico TKL",
+      "description": "Teclado mecánico tenkeyless con switches Cherry MX Red",
+      "price": 89.95,
+      "stock": 60,
+      "category": "Periféricos",
+      "status": "ACTIVE",
+      "createdAt": "2026-04-05T09:00:00Z",
+      "updatedAt": "2026-04-05T09:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440005",
+      "name": "Hub USB-C 10 puertos",
+      "description": "Hub con HDMI 4K, USB-A 3.0, SD card y carga 100W",
+      "price": 59.99,
+      "stock": 85,
+      "category": "Accesorios",
+      "status": "ACTIVE",
+      "createdAt": "2026-04-06T11:00:00Z",
+      "updatedAt": "2026-04-06T11:00:00Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "660e8400-e29b-41d4-a716-446655440001",
+      "name": "Ana García López",
+      "email": "ana.garcia@example.com",
+      "phone": "+34 600 123 456",
+      "address": {
+        "street": "Calle Gran Vía 45",
+        "city": "Madrid",
+        "country": "España"
+      },
+      "createdAt": "2026-04-01T09:00:00Z"
+    },
+    {
+      "id": "660e8400-e29b-41d4-a716-446655440002",
+      "name": "Carlos López Martínez",
+      "email": "carlos.lopez@example.com",
+      "phone": "+34 655 789 012",
+      "address": {
+        "street": "Paseo de Gracia 22",
+        "city": "Barcelona",
+        "country": "España"
+      },
+      "createdAt": "2026-04-03T11:00:00Z"
+    },
+    {
+      "id": "660e8400-e29b-41d4-a716-446655440003",
+      "name": "María Fernández Ruiz",
+      "email": "maria.fernandez@example.com",
+      "phone": "+34 620 345 678",
+      "address": {
+        "street": "Avenida de la Constitución 10",
+        "city": "Sevilla",
+        "country": "España"
+      },
+      "createdAt": "2026-04-07T14:00:00Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "770e8400-e29b-41d4-a716-446655440001",
+      "customerId": "660e8400-e29b-41d4-a716-446655440001",
+      "customerName": "Ana García López",
+      "status": "PENDING",
+      "totalAmount": 1379.97,
+      "notes": "Entregar por la mañana si es posible",
+      "items": [
+        {
+          "id": "880e8400-e29b-41d4-a716-446655440001",
+          "productId": "550e8400-e29b-41d4-a716-446655440001",
+          "productName": "Laptop Pro 15",
+          "quantity": 1,
+          "unitPrice": 1299.99,
+          "subtotal": 1299.99
+        },
+        {
+          "id": "880e8400-e29b-41d4-a716-446655440002",
+          "productId": "550e8400-e29b-41d4-a716-446655440002",
+          "productName": "Ratón Inalámbrico Pro",
+          "quantity": 2,
+          "unitPrice": 39.99,
+          "subtotal": 79.98
+        }
+      ],
+      "createdAt": "2026-04-10T14:00:00Z",
+      "updatedAt": "2026-04-10T14:00:00Z"
+    },
+    {
+      "id": "770e8400-e29b-41d4-a716-446655440002",
+      "customerId": "660e8400-e29b-41d4-a716-446655440002",
+      "customerName": "Carlos López Martínez",
+      "status": "VALIDATED",
+      "totalAmount": 638.95,
+      "notes": null,
+      "items": [
+        {
+          "id": "880e8400-e29b-41d4-a716-446655440003",
+          "productId": "550e8400-e29b-41d4-a716-446655440004",
+          "productName": "Teclado Mecánico TKL",
+          "quantity": 1,
+          "unitPrice": 89.95,
+          "subtotal": 89.95
+        },
+        {
+          "id": "880e8400-e29b-41d4-a716-446655440004",
+          "productId": "550e8400-e29b-41d4-a716-446655440005",
+          "productName": "Hub USB-C 10 puertos",
+          "quantity": 2,
+          "unitPrice": 59.99,
+          "subtotal": 119.98
+        },
+        {
+          "id": "880e8400-e29b-41d4-a716-446655440005",
+          "productId": "550e8400-e29b-41d4-a716-446655440002",
+          "productName": "Ratón Inalámbrico Pro",
+          "quantity": 1,
+          "unitPrice": 39.99,
+          "subtotal": 39.99
+        }
+      ],
+      "createdAt": "2026-04-08T09:30:00Z",
+      "updatedAt": "2026-04-09T10:00:00Z"
+    },
+    {
+      "id": "770e8400-e29b-41d4-a716-446655440003",
+      "customerId": "660e8400-e29b-41d4-a716-446655440003",
+      "customerName": "María Fernández Ruiz",
+      "status": "CONFIRMED",
+      "totalAmount": 59.99,
+      "notes": null,
+      "items": [
+        {
+          "id": "880e8400-e29b-41d4-a716-446655440006",
+          "productId": "550e8400-e29b-41d4-a716-446655440005",
+          "productName": "Hub USB-C 10 puertos",
+          "quantity": 1,
+          "unitPrice": 59.99,
+          "subtotal": 59.99
+        }
+      ],
+      "createdAt": "2026-04-05T16:00:00Z",
+      "updatedAt": "2026-04-07T11:00:00Z"
+    }
+  ]
+}

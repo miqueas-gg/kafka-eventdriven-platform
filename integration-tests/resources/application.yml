@@ -1,0 +1,42 @@
+spring:
+  # Configuración de la base de datos para el test
+  datasource:
+    # Las URLs se sobreescribirán dinámicamente, pero dejamos el driver
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      # create-drop asegura que las tablas se creen al empezar y se borren al terminar
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        # En el test de Testcontainers, para evitar líos de permisos, usamos el esquema public
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Configuración de Kafka para el test
+  kafka:
+    consumer:
+      group-id: integration-test-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      ack-mode: manual_immediate
+
+# Configuración de los tópicos para que coincidan con el test
+app:
+  kafka:
+    topics:
+      ingest: domain.events
+
+# Desactivamos el puerto de management en los tests para evitar conflictos
+management:
+  server:
+    port: -1 
+  endpoints:
+    enabled-by-default: false

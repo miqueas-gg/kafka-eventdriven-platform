@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.kafkaeventdriven.ingest.infrastructure.rest.EventQueryIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.166 s -- in com.kafkaeventdriven.ingest.infrastructure.rest.EventQueryIntegrationTest
